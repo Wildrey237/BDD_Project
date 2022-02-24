@@ -1,2 +1,3 @@
 print('hello word')
-print('bonjour')
+print('bonjour will')
+print("salut c'est bastos")
