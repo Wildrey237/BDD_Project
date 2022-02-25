@@ -1,0 +1,24 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+Add a titanic member
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class=""offset-2 col-8>
+            {{ wtf.quick_form(form) }}
+    </div>
+</div>
+{% endblock %}
