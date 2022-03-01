@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 01 mars 2022 à 10:04
+-- Généré le : mar. 01 mars 2022 à 11:06
 -- Version du serveur :  10.3.34-MariaDB-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -65,6 +65,7 @@ CREATE TABLE `Compte` (
   `compteID` int(11) NOT NULL,
   `nom` varchar(50) DEFAULT NULL,
   `prenom` varchar(50) DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
   `mdp` varchar(50) DEFAULT NULL,
   `DateDeNaissance` date DEFAULT NULL,
   `role` tinyint(1) DEFAULT NULL
@@ -74,9 +75,9 @@ CREATE TABLE `Compte` (
 -- Déchargement des données de la table `Compte`
 --
 
-INSERT INTO `Compte` (`compteID`, `nom`, `prenom`, `mdp`, `DateDeNaissance`, `role`) VALUES
-(1, 'Client', 'Jevisite', 'clientjevisite', '2003-09-29', 0),
-(2, 'Administrateur', 'root', 'root', '2003-06-29', 1);
+INSERT INTO `Compte` (`compteID`, `nom`, `prenom`, `email`, `mdp`, `DateDeNaissance`, `role`) VALUES
+(1, 'Client', 'Jevisite', 'jesuisunclient@gmail.com', 'clientjevisite', '2003-09-29', 0),
+(2, 'Administrateur', 'root', 'jesuisunadmin@gmail.com', 'root', '2003-06-29', 1);
 
 -- --------------------------------------------------------
 
