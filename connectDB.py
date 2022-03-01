@@ -16,7 +16,7 @@ class Singleton:
 @Singleton
 class DBSingleton:
     def __init__(self):
-        self.conn = mysql.connector.connect(user='root', password='root', host='localhost', database='happyFly')
+        self.conn = mysql.connector.connect(user='root', password='root', host='localhost', database='HappyFly')
         pass
     def query(self, sql, params: tuple = ()):
         cursor = self.conn.cursor()
