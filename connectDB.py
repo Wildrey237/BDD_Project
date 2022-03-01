@@ -13,6 +13,7 @@ class Singleton:
         raise TypeError('Singletons must be accessed through `Instance()`.')
     def __instancecheck__(self, instance):
         return isinstance(instance,self._cls)
+
 @Singleton
 class DBSingleton:
     def __init__(self):
@@ -27,3 +28,26 @@ class DBSingleton:
         return result
     def __str__(self):
         return 'Data connection object'
+"""
+class DBSingleton:
+    def __init__(self):
+        self.conn = mysql.connector.connect(user='root', password='root', host='localhost', database='HappyFly')
+        pass
+
+    def query(self, sql, params: tuple = ()):
+        cursor = self.conn.cursor()
+        cursor.execute(sql, params)
+        try:
+            self.result = cursor.fetchall()
+        except mysql.connector.errors.InterfaceError:
+            print('rien a reccup')
+            self.result = False
+            return self.result
+        finally:
+            self.conn.commit()
+            cursor.close()
+            return self.result
+
+    def __str__(self):
+        return 'Data connection object'
+"""
