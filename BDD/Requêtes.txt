@@ -1,47 +1,35 @@
--- phpMyAdmin SQL Dump
--- version 4.9.5deb2
--- https://www.phpmyadmin.net/
---
--- Hôte : localhost:3306
--- Généré le : mar. 01 mars 2022 à 12:11
--- Version du serveur :  10.3.34-MariaDB-0ubuntu0.20.04.1
--- Version de PHP : 7.4.3
+requête 1 :
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+SELECT Circuit.ID,descriptif, depart.nom AS 'ville de départ', arrivee.nom AS 'ville d'arrivée', COUNT(Etape.circuit_ID) AS 'nombre d'étapes' 
+FROM `Circuit`
+JOIN Ville AS depart ON Circuit.villeDepartID = depart.villeID
+JOIN Ville AS arrivee ON Circuit.villeArriveeID= arrivee.villeID
+JOIN Etape ON Circuit.ID = Etape.Circuit_ID
+WHERE Circuit.ID = 7;
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+requête 2 :
 
---
--- Base de données : `HappyFly`
---
+DELETE FROM LieuDeVisite 
+WHERE ID NOT IN (SELECT LieuDeVisite_ID FROM Etape);
 
--- --------------------------------------------------------
 
---
--- Structure de la table `Circuit`
---
+requête 3 :
 
-CREATE TABLE `Circuit` (
-  `ID` int(11) NOT NULL,
-  `descriptif` text DEFAULT NULL,
-  `dateDepart` date DEFAULT NULL,
-  `nbrPlacesDisponibles` int(3) DEFAULT NULL,
-  `dureeEnJours` int(2) DEFAULT NULL,
-  `prixInscription` float DEFAULT NULL,
-  `villeDepartID` int(11) NOT NULL,
-  `villeArriveeID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+SELECT (SUM(prixVisite) + prixInscription) AS Prix_Complet 
+FROM LieuDeVisite 
+LEFT JOIN Etape ON LieuDeVisite.ID = Etape.LieuDeVisite_ID 
+LEFT JOIN Circuit ON Etape.circuit_ID = Circuit.ID 
+WHERE circuit_ID = 1;
 
---
--- Déchargement des données de la table `Circuit`
---
+
+requête 4 :
+
+INSERT INTO `Reservation` (`reservationID`, `compteReservationID`, `CircuitID`,	`dateReservation`) VALUES
+(1, 1, 5, '2022-06-15');
+
+
+Requêtes de la bases de donnnées :
 
 INSERT INTO `Circuit` (`ID`, `descriptif`, `dateDepart`, `nbrPlacesDisponibles`, `dureeEnJours`, `prixInscription`, `villeDepartID`, `villeArriveeID`) VALUES
 (1, 'Visitez les lieux les plus connus de l\'Espagne.', '2022-04-25', 90, 3, 250, 1, 5),
@@ -55,47 +43,11 @@ INSERT INTO `Circuit` (`ID`, `descriptif`, `dateDepart`, `nbrPlacesDisponibles`,
 (9, 'Vivez la mythologie grecque en découvrant la Grèce.', '2022-08-18', 70, 7, 300, 41, 45),
 (10, 'Découvrez la gastronomie et les activités sportives du Pays-Bas', '2022-09-07', 35, 1, 75, 46, 50);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `Compte`
---
-
-CREATE TABLE `Compte` (
-  `compteID` int(11) NOT NULL,
-  `nom` varchar(50) DEFAULT NULL,
-  `prenom` varchar(50) DEFAULT NULL,
-  `mdp` varchar(50) DEFAULT NULL,
-  `DateDeNaissance` date DEFAULT NULL,
-  `role` tinyint(1) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `Compte`
---
 
 INSERT INTO `Compte` (`compteID`, `nom`, `prenom`, `mdp`, `DateDeNaissance`, `role`, `email`) VALUES
 (1, 'Client', 'Jevisite', 'clientjevisite', '2003-09-29', 0, 'jesuisunclient@gmail.com'),
 (2, 'Administrateur', 'root', 'root', '2003-06-29', 1, 'jesuisunadmin@gmail.com');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `Etape`
---
-
-CREATE TABLE `Etape` (
-  `ordre` int(2) NOT NULL,
-  `dateEtape` date DEFAULT NULL,
-  `dureeEnMinute` int(4) DEFAULT NULL,
-  `circuit_ID` int(11) NOT NULL,
-  `LieuDeVisite_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `Etape`
---
 
 INSERT INTO `Etape` (`ordre`, `dateEtape`, `dureeEnMinute`, `circuit_ID`, `LieuDeVisite_ID`) VALUES
 (1, '2022-04-25', 60, 1, 1),
@@ -149,23 +101,6 @@ INSERT INTO `Etape` (`ordre`, `dateEtape`, `dureeEnMinute`, `circuit_ID`, `LieuD
 (49, '2022-09-07', 105, 10, 49),
 (50, '2022-09-07', 110, 10, 50);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `LieuDeVisite`
---
-
-CREATE TABLE `LieuDeVisite` (
-  `ID` int(11) NOT NULL,
-  `label` varchar(100) DEFAULT NULL,
-  `descriptif` text DEFAULT NULL,
-  `prixVisite` float DEFAULT NULL,
-  `Ville_villeID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `LieuDeVisite`
---
 
 INSERT INTO `LieuDeVisite` (`ID`, `label`, `descriptif`, `prixVisite`, `Ville_villeID`) VALUES
 (1, 'L’Alhambra', 'Vous cherchez quoi faire à Grenade ? L’Alhambra, palais le plus fréquenté d’Espagne, est sans doute le lieu le plus emblématique à visiter dans la ville. Déclarée Patrimoine Mondial de l’Unesco en 1984, la cité fait partie des 21 candidats finalistes pour devenir l’une des 7 nouvelles merveilles du monde.\r\n\r\nEmblématique de l’apogée de l’art andalou, la Torre de Comares fut construite sur l’initiative de Yusuf I. Le célèbre Patio de los Leones vit le jour sur la volonté de Mohamed V.', 19, 1),
@@ -219,44 +154,6 @@ INSERT INTO `LieuDeVisite` (`ID`, `label`, `descriptif`, `prixVisite`, `Ville_vi
 (49, 'Museum Giethoorn \'t Olde Maat Uus', 'Musée vivant reconstituant village fermier historique avec acteurs costumés, boutique de cadeaux et café.', 6.5, 49),
 (50, 'moulins à vent de Kinderdijk', 'Les moulins à vent de Kinderdijk sont un groupe de 19 moulins à vent monumentaux dans le polder d\'Alblasserwaard, dans la province de la Hollande méridionale, aux Pays-Bas.', 0, 50);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `Media`
---
-
-CREATE TABLE `Media` (
-  `mediaID` int(11) NOT NULL,
-  `LieuDeVisite_ID` int(11) NOT NULL,
-  `images` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `ModificationCompte`
---
-
-CREATE TABLE `ModificationCompte` (
-  `ModificateurCompteID` int(11) NOT NULL,
-  `CompteModifiéID` int(11) NOT NULL,
-  `dateModification` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Pays`
---
-
-CREATE TABLE `Pays` (
-  `paysID` int(11) NOT NULL,
-  `nom` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `Pays`
---
 
 INSERT INTO `Pays` (`paysID`, `nom`) VALUES
 (1, 'Espagne'),
@@ -270,33 +167,6 @@ INSERT INTO `Pays` (`paysID`, `nom`) VALUES
 (9, 'Grèce'),
 (10, 'Pays-Bas');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `Reservation`
---
-
-CREATE TABLE `Reservation` (
-  `compteReservationID` int(11) NOT NULL,
-  `CircuitID` int(11) NOT NULL,
-  `dateReservation` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Ville`
---
-
-CREATE TABLE `Ville` (
-  `villeID` int(11) NOT NULL,
-  `nom` varchar(60) DEFAULT NULL,
-  `Pays_paysID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `Ville`
---
 
 INSERT INTO `Ville` (`villeID`, `nom`, `Pays_paysID`) VALUES
 (1, 'Grenade', 1),
@@ -349,167 +219,3 @@ INSERT INTO `Ville` (`villeID`, `nom`, `Pays_paysID`) VALUES
 (48, 'Amsterdam', 10),
 (49, 'Giethoorn', 10),
 (50, 'Kinderdijk', 10);
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `Circuit`
---
-ALTER TABLE `Circuit`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_Circuit_Ville1_idx` (`villeDepartID`),
-  ADD KEY `fk_Circuit_Ville2_idx` (`villeArriveeID`);
-
---
--- Index pour la table `Compte`
---
-ALTER TABLE `Compte`
-  ADD PRIMARY KEY (`compteID`);
-
---
--- Index pour la table `Etape`
---
-ALTER TABLE `Etape`
-  ADD PRIMARY KEY (`circuit_ID`,`LieuDeVisite_ID`,`ordre`),
-  ADD KEY `fk_etape_circuit_idx` (`circuit_ID`),
-  ADD KEY `fk_Etape_LieuDeVisite1_idx` (`LieuDeVisite_ID`);
-
---
--- Index pour la table `LieuDeVisite`
---
-ALTER TABLE `LieuDeVisite`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `fk_LieuDeVisite_Ville1_idx` (`Ville_villeID`);
-
---
--- Index pour la table `Media`
---
-ALTER TABLE `Media`
-  ADD PRIMARY KEY (`mediaID`),
-  ADD KEY `fk_Medias_LieuDeVisite1_idx` (`LieuDeVisite_ID`);
-
---
--- Index pour la table `ModificationCompte`
---
-ALTER TABLE `ModificationCompte`
-  ADD PRIMARY KEY (`ModificateurCompteID`,`CompteModifiéID`),
-  ADD KEY `fk_Compte_has_Compte_Compte2_idx` (`CompteModifiéID`),
-  ADD KEY `fk_Compte_has_Compte_Compte1_idx` (`ModificateurCompteID`);
-
---
--- Index pour la table `Pays`
---
-ALTER TABLE `Pays`
-  ADD PRIMARY KEY (`paysID`);
-
---
--- Index pour la table `Reservation`
---
-ALTER TABLE `Reservation`
-  ADD PRIMARY KEY (`compteReservationID`,`CircuitID`,`dateReservation`),
-  ADD KEY `fk_Reservation_Compte1_idx` (`compteReservationID`),
-  ADD KEY `fk_Reservation_Circuit1_idx` (`CircuitID`);
-
---
--- Index pour la table `Ville`
---
-ALTER TABLE `Ville`
-  ADD PRIMARY KEY (`villeID`),
-  ADD KEY `fk_Ville_Pays1_idx` (`Pays_paysID`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `Circuit`
---
-ALTER TABLE `Circuit`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT pour la table `Compte`
---
-ALTER TABLE `Compte`
-  MODIFY `compteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT pour la table `LieuDeVisite`
---
-ALTER TABLE `LieuDeVisite`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- AUTO_INCREMENT pour la table `Media`
---
-ALTER TABLE `Media`
-  MODIFY `mediaID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Pays`
---
-ALTER TABLE `Pays`
-  MODIFY `paysID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT pour la table `Ville`
---
-ALTER TABLE `Ville`
-  MODIFY `villeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `Circuit`
---
-ALTER TABLE `Circuit`
-  ADD CONSTRAINT `fk_Circuit_Ville1` FOREIGN KEY (`villeDepartID`) REFERENCES `Ville` (`villeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Circuit_Ville2` FOREIGN KEY (`villeArriveeID`) REFERENCES `Ville` (`villeID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `Etape`
---
-ALTER TABLE `Etape`
-  ADD CONSTRAINT `fk_Etape_LieuDeVisite1` FOREIGN KEY (`LieuDeVisite_ID`) REFERENCES `LieuDeVisite` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_etape_circuit` FOREIGN KEY (`circuit_ID`) REFERENCES `Circuit` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `LieuDeVisite`
---
-ALTER TABLE `LieuDeVisite`
-  ADD CONSTRAINT `fk_LieuDeVisite_Ville1` FOREIGN KEY (`Ville_villeID`) REFERENCES `Ville` (`villeID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `Media`
---
-ALTER TABLE `Media`
-  ADD CONSTRAINT `fk_Medias_LieuDeVisite1` FOREIGN KEY (`LieuDeVisite_ID`) REFERENCES `LieuDeVisite` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `ModificationCompte`
---
-ALTER TABLE `ModificationCompte`
-  ADD CONSTRAINT `fk_Compte_has_Compte_Compte1` FOREIGN KEY (`ModificateurCompteID`) REFERENCES `Compte` (`compteID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Compte_has_Compte_Compte2` FOREIGN KEY (`CompteModifiéID`) REFERENCES `Compte` (`compteID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `Reservation`
---
-ALTER TABLE `Reservation`
-  ADD CONSTRAINT `fk_Reservation_Circuit1` FOREIGN KEY (`CircuitID`) REFERENCES `Circuit` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Reservation_Compte1` FOREIGN KEY (`compteReservationID`) REFERENCES `Compte` (`compteID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `Ville`
---
-ALTER TABLE `Ville`
-  ADD CONSTRAINT `fk_Ville_Pays1` FOREIGN KEY (`Pays_paysID`) REFERENCES `Pays` (`paysID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
