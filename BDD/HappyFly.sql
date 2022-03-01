@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 01 mars 2022 à 09:01
+-- Généré le : mar. 01 mars 2022 à 10:04
 -- Version du serveur :  10.3.34-MariaDB-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -33,7 +33,7 @@ CREATE TABLE `Circuit` (
   `descriptif` text DEFAULT NULL,
   `dateDepart` date DEFAULT NULL,
   `nbrPlacesDisponibles` int(3) DEFAULT NULL,
-  `dureeEnHeure` int(3) DEFAULT NULL,
+  `dureeEnJours` int(2) DEFAULT NULL,
   `prixInscription` float DEFAULT NULL,
   `villeDepartID` int(11) NOT NULL,
   `villeArriveeID` int(11) NOT NULL
@@ -43,17 +43,17 @@ CREATE TABLE `Circuit` (
 -- Déchargement des données de la table `Circuit`
 --
 
-INSERT INTO `Circuit` (`ID`, `descriptif`, `dateDepart`, `nbrPlacesDisponibles`, `dureeEnHeure`, `prixInscription`, `villeDepartID`, `villeArriveeID`) VALUES
-(1, 'Visitez les lieux les plus connus de l\'Espagne.', '2022-04-25', 90, 70, 250, 1, 5),
-(2, 'Visitez les lieux les plus connus de France ! ', '2022-05-20', 70, 48, 175, 6, 10),
-(3, 'Venez visiter l\'Angleterre grâce à notre circuit touristique.', '2022-06-15', 45, 35, 125, 11, 15),
-(4, 'L\'Italie vous émerveillera de part ses paysages et monuments.', '2022-07-11', 75, 30, 110, 16, 20),
-(5, 'Visitez l\'Allemagne, Pays rempli d\'histoires.', '2022-03-07', 55, 30, 160, 21, 25),
-(6, 'Découvrez la Turquie, Pays vivant de part son histoire.', '2022-07-07', 85, 96, 400, 26, 30),
-(7, 'Visitez l\'Autriche, berceau des grands musiciens classiques, ainsi que ses magnifiques montagnes.', '2022-07-26', 45, 30, 250, 31, 35),
-(8, 'Découvrez la Suisse, pays magnifique et impressionnant.', '2022-08-09', 65, 24, 110, 36, 40),
-(9, 'Vivez la mythologie grecque en découvrant la Grèce.', '2022-08-18', 70, 168, 300, 41, 45),
-(10, 'Découvrez la gastronomie et les activités sportives du Pays-Bas', '2022-09-07', 35, 24, 75, 46, 50);
+INSERT INTO `Circuit` (`ID`, `descriptif`, `dateDepart`, `nbrPlacesDisponibles`, `dureeEnJours`, `prixInscription`, `villeDepartID`, `villeArriveeID`) VALUES
+(1, 'Visitez les lieux les plus connus de l\'Espagne.', '2022-04-25', 90, 3, 250, 1, 5),
+(2, 'Visitez les lieux les plus connus de France ! ', '2022-05-20', 70, 2, 175, 6, 10),
+(3, 'Venez visiter l\'Angleterre grâce à notre circuit touristique.', '2022-06-15', 45, 1, 125, 11, 15),
+(4, 'L\'Italie vous émerveillera de part ses paysages et monuments.', '2022-07-11', 75, 1, 110, 16, 20),
+(5, 'Visitez l\'Allemagne, Pays rempli d\'histoires.', '2022-03-07', 55, 1, 160, 21, 25),
+(6, 'Découvrez la Turquie, Pays vivant de part son histoire.', '2022-07-07', 85, 4, 400, 26, 30),
+(7, 'Visitez l\'Autriche, berceau des grands musiciens classiques, ainsi que ses magnifiques montagnes.', '2022-07-26', 45, 1, 250, 31, 35),
+(8, 'Découvrez la Suisse, pays magnifique et impressionnant.', '2022-08-09', 65, 1, 110, 36, 40),
+(9, 'Vivez la mythologie grecque en découvrant la Grèce.', '2022-08-18', 70, 7, 300, 41, 45),
+(10, 'Découvrez la gastronomie et les activités sportives du Pays-Bas', '2022-09-07', 35, 1, 75, 46, 50);
 
 -- --------------------------------------------------------
 
