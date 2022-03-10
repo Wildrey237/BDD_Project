@@ -22,9 +22,15 @@ class InsertUserForm(FlaskForm):
 
 
 if __name__ == '__main__':
+
+    @app.route('/titanic/correct')
+    def temp():
+        return ("hello")
+
     @app.route('/titanic/adduser', methods=['GET', 'POST'])
     def addUser():
         form = InsertUserForm()
+        retourner = render_template('titanic.html', form=form)
         if form.validate_on_submit():
             nom = form.name.data
             prenom = form.surname.data
@@ -38,7 +44,6 @@ if __name__ == '__main__':
                 role = 1
             else:
                 role = 0
-
             if not mail:
                 flash('Title is required!')
             else:
@@ -46,7 +51,8 @@ if __name__ == '__main__':
                 sql = "INSERT INTO Compte ( nom, prenom, mdp, email, DateDeNaissance, role) VALUES ('%s','%s','%s','%s','%s',%s);" % record
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
-        return render_template('titanic.html', form=form)
+                retourner = redirect('/titanic/correct')
+        return retourner
 
 if __name__ == '__main__':
     app.run(debug=True)
