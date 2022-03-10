@@ -15,24 +15,25 @@ class authform(FlaskForm):
     submit = SubmitField('Submit')
 
 if __name__ == '__main__':
-    def genformlog():
-        form = authform()
-        return render_template('titanic.html', form=form)
+
+    @app.route('/titanic/user')
+    def sessionUser():
+        return ("hello user")
 
 
-    @app.route('/titanic/adduser')
-    def temp():
-        return ("hello")
+    @app.route('/titanic/admin')
+    def sessionAdmin():
+        return ("hello sudo")
 
-    @app.route('/titanic/admin', methods=['POST', 'GET'])
+    @app.route('/titanic/connect', methods=['POST', 'GET'])
     def login():
         form = authform()
-        retouner = None
+        retouner = render_template('titanic.html', form=form)
         if form.validate_on_submit():
             mail = request.form.get('mail')
             MDP = request.form.get('MDP')
             print(mail)
-            sql = f"SELECT email FROM Compte WHERE role = 1 AND email = '{mail}'"
+            sql = f"SELECT email FROM Compte WHERE email = '{mail}'"
             db_instance = DBSingleton.Instance()
             temp = db_instance.query(sql)
             if len(temp) == 0:
@@ -43,7 +44,7 @@ if __name__ == '__main__':
                 if true_mail == mail:
                     print('bon mail')
 
-                    sql = f"SELECT mdp FROM Compte WHERE role = 1 AND email = '{mail}'"
+                    sql = f"SELECT mdp FROM Compte WHERE email = '{mail}'"
                     print(sql)
 
                     db_instance = DBSingleton.Instance()
@@ -56,7 +57,16 @@ if __name__ == '__main__':
                     print(f"le vrai mdp est {password}")
                     if password == MDP:
                         print("bon mdp")
-                        retouner = redirect('/titanic/adduser')
+                        sql = f"SELECT role FROM Compte WHERE email = '{mail}' AND mdp = '{MDP}'"
+                        print (sql)
+                        db_instance = DBSingleton.Instance()
+                        temp = db_instance.query(sql)
+                        print(temp)
+                        id = temp[0][0]
+                        if id == 1:
+                            retouner = redirect('/titanic/admin')
+                        else:
+                            retouner = redirect('/titanic/user')
                     else:
                         print("pas bon mdp")
         return retouner
