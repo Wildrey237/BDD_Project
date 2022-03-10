@@ -3,12 +3,25 @@ body{
     background-size: cover;
 }
 
-.align-center{
+.aligner-centre{
     text-align: center;
     margin-top: 5vh;
 }
 
-.img-size {
+.taille-image {
     width: 35vh;
     height: 35vh;
+}
+
+img {
+    opacity:0;
+    animation: apparition 1s linear forwards 2s;
+}
+@keyframes apparition {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
 }
