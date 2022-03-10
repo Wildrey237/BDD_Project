@@ -27,6 +27,7 @@ if __name__ == '__main__':
     @app.route('/titanic/admin', methods=['POST', 'GET'])
     def login():
         form = authform()
+        retouner = None
         if form.validate_on_submit():
             mail = request.form.get('mail')
             MDP = request.form.get('MDP')
