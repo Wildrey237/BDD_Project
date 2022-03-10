@@ -1,4 +1,14 @@
 body{
-    background-color: black;
-    color: white;
+    background-image: url("../static/images/arriere_plan.png");
+    background-size: cover;
+}
+
+.align-center{
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.img-size {
+    width: 35vh;
+    height: 35vh;
 }
