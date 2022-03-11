@@ -21,26 +21,12 @@ if __name__ == '__main__':
 
     @app.route('/user')
     def sessionUser():
-        session = testlog()
-        boolean = session[3]
-        role = session[0]
-        if boolean == False:
-            var = redirect("/")
-        else:
-            if role == 0:
-                var = "hello user"
+        var = "hello user"
         return var
 
     @app.route('/admin')
     def sessionAdmin():
-        session = testlog()
-        boolean = session[3]
-        role = session[0]
-        if boolean == False:
-            var = redirect("/")
-        else:
-            if role == 0:
-                var = "hello sudo"
+        var = "hello sudo"
         return var
 
 if __name__ == '__main__':
