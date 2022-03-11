@@ -1,11 +1,12 @@
 body{
     background-image: url("../static/images/arriere_plan.png");
     background-size: cover;
+	overflow: hidden;
 }
 
 .aligner-centre{
     text-align: center;
-	margin-top: 30vh;
+	margin-top: 20vh;
 }
 
 .taille-image {
@@ -17,7 +18,7 @@ body{
 	display: flex;
 	position: relative;
 	justify-content: space-between;
-	margin-top: 20vh;
+	margin-top: 7vh;
 	margin-left: 35vw;
 	margin-right: 35vw;
 }
@@ -33,31 +34,36 @@ a {
 }
 
 a.bouton {
-	color: rgba(30, 22, 54, 0.7);
-	box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 2px inset;
+	color: rgba(0, 0, 0, 0.7);
+	box-shadow: rgba(0, 0, 0, 0.7) 0 0px 0px 2px inset;
 }
 
 a.bouton:hover {
 	color: rgb(255, 255, 255);
-	box-shadow: rgb(30, 22, 54) 0 80px 0px 2px inset;
+	box-shadow: rgb(0, 0, 0) 0 80px 0px 2px inset;
 }
 
-img {
+.logo {
 	opacity:0;
 	animation: apparition 1s linear forwards 2s;
 }
 
 .bouton {
-	animation-duration: 3s;
 	animation-name: glissement;
+	animation-duration: 3s;
+}
+
+.avion {
+	animation: defile 10s;
+	visibility: hidden;
 }
 
 @keyframes apparition {
     from {
-        opacity:0;
+        opacity:0%;
     }
     to {
-        opacity:1;
+        opacity:85%;
     }
 }
 
@@ -68,4 +74,15 @@ img {
     to {
 		margin-top: 0%;
     }
+}
+
+@keyframes defile {
+	0% {
+	margin-left: -50%;
+	visibility: visible;
+	}
+	100% {
+	margin-left: 150%;
+	visibility: visible;
+	}
 }
