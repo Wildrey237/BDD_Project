@@ -13,10 +13,13 @@ class authform(FlaskForm):
     mail = StringField('mail', validators=[DataRequired()])
     MDP = StringField('Mot de passe', validators=[DataRequired()])
     submit = SubmitField('Submit')
-
-def login():
+    session_MAIL = None
+    Session_MDP = None
+    Session_id = None
+def testlog():
     form = authform()
-    retouner = render_template('titanic.html', form=form)
+    boolean = False
+    retourner = ['non', 'non', 'non', boolean]
     if form.validate_on_submit():
         mail = request.form.get('mail')
         MDP = request.form.get('MDP')
@@ -50,14 +53,25 @@ def login():
                     db_instance = DBSingleton.Instance()
                     temp = db_instance.query(sql)
                     print(temp)
-                    id = temp[0][0]
-                    if id == 1:
-                        retouner = redirect('/titanic/admin')
-                    else:
-                        retouner = redirect('/titanic/user')
+                    role = temp[0][0]
+                    boolean = True
+                    retourner = [role, mail, MDP, boolean]
                 else:
                     print("pas bon mdp")
-    return retouner
+    return retourner
+
+def log():
+    session = testlog()
+    form = authform()
+    role = session[0]
+    boolean = session[3]
+    result = render_template('titanic.html', form=form)
+    if boolean == True:
+        if role == 1:
+            result = redirect('/admin')
+        else:
+            result = redirect('/user')
+    return result
 
 if __name__ == '__main__':
     app.run(debug=True)

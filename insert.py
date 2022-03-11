@@ -43,7 +43,7 @@ def addUser():
             sql = "INSERT INTO Compte ( nom, prenom, mdp, email, DateDeNaissance, role) VALUES ('%s','%s','%s','%s','%s',%s);" % record
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
-            retourner = redirect('/titanic/correct')
+            retourner = redirect('/connect')
     return retourner
 
 if __name__ == '__main__':
