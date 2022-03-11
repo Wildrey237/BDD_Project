@@ -20,39 +20,31 @@ class InsertUserForm(FlaskForm):
     role = SelectField('Quel est son role', choices=['admin','user'])
     submit = SubmitField('Submit')
 
-
-if __name__ == '__main__':
-
-    @app.route('/titanic/correct')
-    def temp():
-        return ("hello")
-
-    @app.route('/titanic/adduser', methods=['GET', 'POST'])
-    def addUser():
-        form = InsertUserForm()
-        retourner = render_template('titanic.html', form=form)
-        if form.validate_on_submit():
-            nom = form.name.data
-            prenom = form.surname.data
-            mdp = form.MDP.data
-            mail = form.mail.data
-            buffday = request.form['date']
-            buffday = str(buffday)
-            print(buffday)
-            role = form.role.data
-            if role == 'admin':
-                role = 1
-            else:
-                role = 0
-            if not mail:
-                flash('Title is required!')
-            else:
-                record = (nom, prenom, mdp, mail, buffday, role)
-                sql = "INSERT INTO Compte ( nom, prenom, mdp, email, DateDeNaissance, role) VALUES ('%s','%s','%s','%s','%s',%s);" % record
-                db_instance = DBSingleton.Instance()
-                db_instance.query(sql)
-                retourner = redirect('/titanic/correct')
-        return retourner
+def addUser():
+    form = InsertUserForm()
+    retourner = render_template('titanic.html', form=form)
+    if form.validate_on_submit():
+        nom = form.name.data
+        prenom = form.surname.data
+        mdp = form.MDP.data
+        mail = form.mail.data
+        buffday = request.form['date']
+        buffday = str(buffday)
+        print(buffday)
+        role = form.role.data
+        if role == 'admin':
+            role = 1
+        else:
+            role = 0
+        if not mail:
+            flash('Title is required!')
+        else:
+            record = (nom, prenom, mdp, mail, buffday, role)
+            sql = "INSERT INTO Compte ( nom, prenom, mdp, email, DateDeNaissance, role) VALUES ('%s','%s','%s','%s','%s',%s);" % record
+            db_instance = DBSingleton.Instance()
+            db_instance.query(sql)
+            retourner = redirect('/titanic/correct')
+    return retourner
 
 if __name__ == '__main__':
     app.run(debug=True)
