@@ -18,7 +18,7 @@ class authform(FlaskForm):
     Session_id = None
 def testlog():
     form = authform()
-    boolean = False
+    boolean = 0
     retourner = ['non', 'non', 'non', boolean]
     if form.validate_on_submit():
         mail = request.form.get('mail')
@@ -54,7 +54,7 @@ def testlog():
                     temp = db_instance.query(sql)
                     print(temp)
                     role = temp[0][0]
-                    boolean = True
+                    boolean = 1
                     retourner = [role, mail, MDP, boolean]
                 else:
                     print("pas bon mdp")
@@ -65,12 +65,13 @@ def log():
     form = authform()
     role = session[0]
     boolean = session[3]
+    print(f"auth bool is {boolean}")
+
     result = render_template('userconnect.html', form=form)
-    if boolean == True:
-        if role == 1:
-            result = redirect('/admin')
-        else:
-            result = redirect('/user')
+    if role == 1:
+        result = redirect('/admin')
+    elif role == 0:
+        result = redirect('/user')
     return result
 
 if __name__ == '__main__':
