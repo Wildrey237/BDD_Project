@@ -4,10 +4,7 @@
 {% block styles %}
 {{ super() }}
 	<style>
-		body {
-		    background-image: url("../static/images/fond_gris_degrade.png");
-		    background-size: cover;
-		}
+		body { background: #e8f1f9; }
 	</style>
 {% endblock %}
 
@@ -18,10 +15,10 @@
 
 
 {% block content %}
-    <div>
-        <div>
-            {{ wtf.quick_form(form) }}
-        </div>
-    </div>
 
+<div>
+    <div>
+            {{ wtf.quick_form(form) }}
+    </div>
+</div>
 {% endblock %}
