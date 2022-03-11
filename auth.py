@@ -65,7 +65,7 @@ def log():
     form = authform()
     role = session[0]
     boolean = session[3]
-    result = render_template('titanic.html', form=form)
+    result = render_template('userconnect.html', form=form)
     if boolean == True:
         if role == 1:
             result = redirect('/admin')

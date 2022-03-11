@@ -22,7 +22,7 @@ class InsertUserForm(FlaskForm):
 
 def addUser():
     form = InsertUserForm()
-    retourner = render_template('titanic.html', form=form)
+    retourner = render_template('userconnect.html', form=form)
     if form.validate_on_submit():
         nom = form.name.data
         prenom = form.surname.data
