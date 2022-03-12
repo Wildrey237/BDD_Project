@@ -1,8 +1,7 @@
-from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
-from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,  DateField, PasswordField
+from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,  DateField, PasswordField, EmailField
 from wtforms.validators import DataRequired, NumberRange
 from connectDB import DBSingleton
 
@@ -12,18 +11,17 @@ Bootstrap(app)
 
 
 class InsertUserForm(FlaskForm):
-    name = StringField('nom', validators=[DataRequired()])
-    surname = StringField('prenom', validators=[DataRequired()])
-    mail = StringField('mail', validators=[DataRequired()])
-    date = DateField('Date' ,format ='%Y-%m-%d')
+    name = StringField('Nom', validators=[DataRequired()])
+    surname = StringField('Prenom', validators=[DataRequired()])
+    mail = EmailField('mail', validators=[DataRequired()])
+    date = DateField('Date', format ='%Y-%m-%d')
     MDP = PasswordField('mot de passe ?')
-    role = SelectField('Quel est son role', choices=['admin','user'])
     submit = SubmitField('Submit')
 
 def addUser():
     form = InsertUserForm()
     title = 'formulaire'
-    retourner = render_template('userconnect.html', form=form, title=title)
+    retourner = render_template('user-connect.html', form=form, title=title)
     if form.validate_on_submit():
         nom = form.name.data
         prenom = form.surname.data
@@ -32,7 +30,7 @@ def addUser():
         buffday = request.form['date']
         buffday = str(buffday)
         print(buffday)
-        role = form.role.data
+        role = 0
         if role == 'admin':
             role = 1
         else:

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
-from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,PasswordField
+from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,PasswordField, EmailField
 from wtforms.validators import DataRequired, NumberRange
 from connectDB import DBSingleton
 
@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'this is a secret'
 Bootstrap(app)
 
 class authform(FlaskForm):
-    mail = StringField('mail', validators=[DataRequired()])
+    mail = EmailField('mail', validators=[DataRequired()])
     MDP = PasswordField('Mot de passe', validators=[DataRequired()])
     submit = SubmitField('Submit')
     session_MAIL = None
@@ -67,7 +67,7 @@ def log():
     boolean = session[3]
     print(f"auth bool is {boolean}")
     title = 'login'
-    result = render_template('userconnect.html', form=form, title=title)
+    result = render_template('user-connect.html', form=form, title=title)
     if role == 1:
         result = redirect('/admin')
     elif role == 0:
