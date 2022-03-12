@@ -1,3 +1,4 @@
 env/
 perso/
 .idea/
+__pycache__/

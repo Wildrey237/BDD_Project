@@ -1,0 +1,13 @@
+body {
+    background-image: url(../static/images/fond_gris_degrade.png);
+    background-size: cover;
+}
+
+.container {
+    background-color: grey;
+}
+
+img {
+    width: 10vw;
+    height: 10vw;
+}
