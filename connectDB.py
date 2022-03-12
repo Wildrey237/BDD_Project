@@ -24,7 +24,7 @@ class DBSingleton:
         cursor.execute(sql, params)
         result = cursor.fetchall()
         self.conn.commit()
-        cursor.close
+        cursor.close()
         return result
     def __str__(self):
         return 'Data connection object'
