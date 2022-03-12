@@ -2,7 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
-from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,  DateField
+from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,  DateField, PasswordField
 from wtforms.validators import DataRequired, NumberRange
 from connectDB import DBSingleton
 
@@ -16,7 +16,7 @@ class InsertUserForm(FlaskForm):
     surname = StringField('prenom', validators=[DataRequired()])
     mail = StringField('mail', validators=[DataRequired()])
     date = DateField('Date' ,format ='%Y-%m-%d')
-    MDP = StringField('mot de passe ?')
+    MDP = PasswordField('mot de passe ?')
     role = SelectField('Quel est son role', choices=['admin','user'])
     submit = SubmitField('Submit')
 

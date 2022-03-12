@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
-from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField
+from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,PasswordField
 from wtforms.validators import DataRequired, NumberRange
 from connectDB import DBSingleton
 
@@ -11,7 +11,7 @@ Bootstrap(app)
 
 class authform(FlaskForm):
     mail = StringField('mail', validators=[DataRequired()])
-    MDP = StringField('Mot de passe', validators=[DataRequired()])
+    MDP = PasswordField('Mot de passe', validators=[DataRequired()])
     submit = SubmitField('Submit')
     session_MAIL = None
     Session_MDP = None
