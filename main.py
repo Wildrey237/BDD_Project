@@ -24,7 +24,7 @@ if __name__ == '__main__':
         var = "hello user"
         return var
 
-    @app.route('/admin')
+    @app.route('/root')
     def sessionAdmin():
         var = "hello sudo"
         return var
