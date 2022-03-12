@@ -66,8 +66,8 @@ def log():
     role = session[0]
     boolean = session[3]
     print(f"auth bool is {boolean}")
-
-    result = render_template('userconnect.html', form=form)
+    title = 'login'
+    result = render_template('userconnect.html', form=form, title=title)
     if role == 1:
         result = redirect('/admin')
     elif role == 0:
