@@ -11,7 +11,7 @@ if __name__ == '__main__':
     def index():
         return render_template('index.html')
 
-    @app.route('/connect', methods=['POST', 'GET'])
+    @app.route('/login', methods=['POST', 'GET'])
     def appeLogin():
         return  log()
 
