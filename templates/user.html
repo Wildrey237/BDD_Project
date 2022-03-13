@@ -1,15 +1,47 @@
-{% extends 'base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-
-{% block title %}  {{ title }}  {% endblock %}
-
+{% extends 'interface.html' %}
 
 {% block content %}
+    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+    <form method="POST">
+            <table>
+            <thead>
+                <tr>
+                    <th>descriptif</th>
+                    <th>date de depart</th>
+                    <th>nbre de place</th>
+                    <th>durée en jours</th>
+                    <th>prix</th>
+                </tr>
+            </thead>
+            <tbody>
 
-<div>
+                {% for post in posts %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="id" value= {{post[0]}}>
+                        </td>
+                        <td>
+                             {{ post[1] }}<br>
+                        </td>
+                        <td>
+                             {{ post[2] }}<br>
+                        </td>
+                        <td>
+                             {{ post[3] }}<br>
+                        </td>
+                        <td>
+                             {{ post[4] }}<br>
+                        </td>
+                        <td>
+                             {{ post[5] }}<br>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit">Reserver</button>
+    </form>
     <div>
-            {{ wtf.quick_form(form) }}
+
     </div>
-</div>
 {% endblock %}
