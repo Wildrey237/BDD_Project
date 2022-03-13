@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, request, Blu
 from flask_bootstrap import Bootstrap
 from auth import log, testlog
 from insert import addUser
+from  user import User
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this is a secret'
@@ -19,10 +20,9 @@ if __name__ == '__main__':
     def appelformuser():
         return addUser()
 
-    @app.route('/user')
+    @app.route('/user', methods=['GET', 'POST'])
     def sessionUser():
-        var = "hello user"
-        return var
+        return User()
 
     @app.route('/admin')
     def sessionAdmin():

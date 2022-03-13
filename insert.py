@@ -1,7 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
-from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField,  DateField, PasswordField, EmailField
+from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField, DateField, \
+    PasswordField, EmailField
 from wtforms.validators import DataRequired, NumberRange
 from connectDB import DBSingleton
 
@@ -14,9 +15,10 @@ class InsertUserForm(FlaskForm):
     name = StringField('Nom', validators=[DataRequired()])
     surname = StringField('Prenom', validators=[DataRequired()])
     mail = EmailField('mail', validators=[DataRequired()])
-    date = DateField('Date', format ='%Y-%m-%d')
+    date = DateField('Date', format='%Y-%m-%d')
     MDP = PasswordField('mot de passe ?')
     submit = SubmitField('Submit')
+
 
 def addUser():
     form = InsertUserForm()
@@ -44,6 +46,7 @@ def addUser():
             db_instance.query(sql)
             retourner = redirect('/connect')
     return retourner
+
 
 if __name__ == '__main__':
     app.run(debug=True)
