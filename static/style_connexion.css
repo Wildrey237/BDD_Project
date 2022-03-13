@@ -1,15 +1,15 @@
 body {
-    background-image: url(../static/images/fond_gris_degrade.png);
+    background-image: url(../static/images/arriere_plan_formulaire.png);
     background-size: cover;
     overflow: hidden;
 }
 
 .container {
     text-align: center;
-    background-color: rgb(204, 204, 204);
+    background-color: rgb(240, 240, 240);
     margin-top: 50vh;
     transform: translateY(-50%);
-    width: 25vw;
+    width: 30vw;
     border-radius: 5px;
 }
 
@@ -25,13 +25,14 @@ img {
 }
 
 .form-group {
-    width: 23.5vw;
+    width: 28.5vw;
 }
 
 .btn {
     font-family: 'Poppins', sans-serif;
     margin-top: 2.5vh;
     margin-bottom: 2.5vh;
+    color: black;
 }
 
 .btn-primary {
@@ -44,8 +45,8 @@ img {
 	text-decoration: none;
 }
 
-.btn.btn-primary:hover {
-	color: rgb(255, 255, 255);
+.btn-primary:hover {
+	color: white;
 	box-shadow: rgb(0, 0, 0) 0 80px 0px 2px inset;
     background-color: rgba(0, 0, 0, 0);
     border-color: black;
