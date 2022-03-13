@@ -1,6 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, Blueprint
+from flask import Flask, render_template, redirect, url_for, flash, request, Blueprint, make_response
 from flask_bootstrap import Bootstrap
-from auth import log, testlog
+from auth import LogUser
 from insert import addUser
 from  user import User
 
@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     @app.route('/login', methods=['POST', 'GET'])
     def appeLogin():
-        return  log()
+        return LogUser()
 
     @app.route('/form', methods=['GET', 'POST'])
     def appelformuser():
