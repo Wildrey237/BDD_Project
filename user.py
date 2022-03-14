@@ -16,10 +16,15 @@ def User():
 
     if cookie[3] is True:
         title = 'formulaire'
-        sql = f"SELECT * FROM Circuit"
+        sql = """SELECT Circuit.ID,Circuit.descriptif, Circuit.dateDepart, Circuit.nbrPlacesDisponibles, Circuit.dureeEnJours, Circuit.prixInscription, Media.images
+                FROM Circuit
+                JOIN Etape ON Circuit.ID = Etape.Circuit_ID
+                JOIN LieuDeVisite ON Etape.LieuDeVisite_ID = LieuDeVisite.ID
+                JOIN Media ON LieuDeVisite.ID = Media.LieuDeVisite_ID"""
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        retourner = render_template('user.html', title=title, posts=posts)
+
+        retourner = render_template('user.html', title=title, posts=posts )
 
         if request.method == 'POST':
             sql = f"SELECT Compteid FROM Compte WHERE email = '{cookie[1]}' AND mdp = '{cookie[2]}'"
