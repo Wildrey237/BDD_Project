@@ -10,6 +10,15 @@
   background-color: rgb(240, 240, 240);
 }
 
+.deconnexion {
+  display: flex;
+  position: absolute;
+  margin-left: 10vw;
+  width: 3vw;
+  margin-top: 2vh;
+  height: auto;
+}
+
 header {
   display: flex;
   justify-content: space-between;

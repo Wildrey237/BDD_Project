@@ -4,6 +4,7 @@
 
     <header>
       <img class="logo" type="png" src="../static/images/logo.png">
+      <img class="deconnexion" type="png" src="../static/images/porte_deconnexion.png">
       <h1 class=titre-header>HappyFly</h1>
       <div class="menu-deroulant">
         <button onclick="myFunction()" class="bouton">☰</button>
@@ -23,34 +24,34 @@
     </header>
 
     <h1>Venez visiter les différents pays grâce à nos différents circuits !</h1>
-        {% for post in posts %}
-            <section>
-                <form method="POST">
-                    <div>
-                        <input type="checkbox" name="id" value= {{post[0]}}>
-                    </div>
+    <form method="POST">
+      {% for post in posts %}
 
-                    <div>
-                    Descriptif : {{ post[1] }}<br>
-                    </div>
-                    <div>
-                    Date de départ : {{ post[2] }}<br>
-                    </div>
-                    <div>
-                    Nombre de places : {{ post[3] }}<br>
-                    </div>
-                    <div>
-                    Durée en jours : {{ post[4] }}<br>
-                    </div>
-                    <div>
-                    Prix : {{ post[5] }}<br>
-                    </div>
-                    <button type="submit" value= {{post[0]}}>Réserver</button>
-                </form>
-                <div class="barre-transition" id={{post[0]}}></div>
-            </section>
-                    
+        <section>
+            <div>
+                <input type="radio" name="id" value= {{post[0]}}>
+            </div>
+
+            <div>
+            Descriptif : {{ post[1] }}<br>
+            </div>
+            <div>
+            Date de départ : {{ post[2] }}<br>
+            </div>
+            <div>
+            Nombre de places : {{ post[3] }}<br>
+            </div>
+            <div>
+            Durée en jours : {{ post[4] }}<br>
+            </div>
+            <div>
+            Prix : {{ post[5] }}<br>
+            </div>
+            <button type="submit" value= {{post[0]}}>Réserver</button>
+            <div class="barre-transition" id={{post[0]}}></div>
+          </section>
+
         {% endfor %}
-
-
+      </form>
+                
 {% endblock %}
