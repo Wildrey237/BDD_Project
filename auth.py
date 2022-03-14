@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash, request, session
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
 from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField, PasswordField, \
@@ -22,8 +22,8 @@ class authform(FlaskForm):
 
 def log():
     form = authform()
-    boolean = 0
-    retourner = ['non', 'non', 'non', boolean]
+    cookie = False
+    retourner = [None, None, None, cookie]
     if form.validate_on_submit():
         mail = request.form.get('mail')
         MDP = request.form.get('MDP')
@@ -35,42 +35,38 @@ def log():
         else:
             true_mail = temp[0][0]
             if true_mail == mail:
-
-
                 sql = f"SELECT mdp FROM Compte WHERE email = '{mail}'"
-
-
                 db_instance = DBSingleton.Instance()
                 temp = db_instance.query(sql)
-
                 password = temp[0][0]
-
                 """mot de passe prit part le insert"""
-
                 if password == MDP:
-
                     sql = f"SELECT role FROM Compte WHERE email = '{mail}' AND mdp = '{MDP}'"
                     db_instance = DBSingleton.Instance()
                     temp = db_instance.query(sql)
-
                     role = temp[0][0]
-                    boolean = 1
-                    retourner = [role, mail, MDP, boolean]
+                    cookie = True
+                    retourner = [role, mail, MDP, cookie]
+                    session['user'] = {"info": retourner}
+                    print(f"le mot de passe session est {retourner}")
                 else:
                     print("pas bon mdp")
     return retourner
 
 def LogUser():
-    session = log()
+    cookie = log()
     form = authform()
-    role = session[0]
-    boolean = session[3]
+    role = cookie[0]
+    print(cookie)
+    session['user'] = {"info": cookie}
+    print(session['user']['info'])
     title = 'login'
-    result = render_template('user-connect.html', form=form, title=title)
-    if role == 1:
-        result = redirect('/admin')
-    elif role == 0:
-        result = redirect('/user')
+    result = render_template('login.html', form=form, title=title)
+    if cookie[3] is True:
+        if role == 1:
+            result = redirect('/admin')
+        elif role == 0:
+            result = redirect('/user')
     return result
 
 

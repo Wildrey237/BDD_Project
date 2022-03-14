@@ -2,7 +2,27 @@
 
 {% block content %}
 
-    <h1> Venez visiter les différents pays grâce à nos différents circuits ! </h1>
+    <header>
+      <img class="logo" type="png" src="../static/images/logo.png">
+      <h1 class=titre-header>HappyFly</h1>
+      <div class="menu-deroulant">
+        <button onclick="myFunction()" class="bouton">☰</button>
+        <div id="fonction-bouton" class="contenu-menu-deroulant">
+          <a class="liens" href="#">Espagne</a>
+          <a class="liens" href="#">France</a>
+          <a class="liens" href="#">Angleterre</a>
+          <a class="liens" href="#">Italie</a>
+          <a class="liens" href="#">Allemagne</a>
+          <a class="liens" href="#">Turquie</a>
+          <a class="liens" href="#">Autriche</a>
+          <a class="liens" href="#">Suisse</a>
+          <a class="liens" href="#">Grèce</a>
+          <a class="liens" href="#">Pays-Bas</a>
+        </div>
+      </div>
+    </header>
+
+    <h1>Venez visiter les différents pays grâce à nos différents circuits !</h1>
     <form method="POST">
             <table>
             <thead>
@@ -19,8 +39,9 @@
                 {% for post in posts %}
                     <tr>
                         <td>
-                            <input type="checkbox" name="id" value= {{post[0]}}>
+                            <input type="button" name="id" value= {{post[0]}}>
                         </td>
+
                         <td>
                              {{ post[1] }}<br>
                         </td>
@@ -36,13 +57,18 @@
                         <td>
                              {{ post[5] }}<br>
                         </td>
+                        <td>
+                            image
+                        </td>
                     </tr>
+
                 {% endfor %}
             </tbody>
         </table>
-        <button type="submit">Reserver</button>
+        <button type="submit">Réserver</button>
     </form>
     <div>
 
     </div>
+
 {% endblock %}

@@ -1,0 +1,68 @@
+body {
+    background-image: url(../static/images/arriere_plan_formulaire.png);
+    background-size: cover;
+    overflow: hidden;
+}
+
+img {
+    width: 10vw;
+    height: 10vw;
+    margin: 5vh;
+}
+
+.container {
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    margin-top: 50vh;
+    transform: translateY(-50%);
+    width: 30vw;
+    border-radius: 5px;
+}
+
+.bouton-retour {
+    display: flex;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 11vh;
+    margin-left: 5vh;
+    font-size: 6vh;
+    color: black;
+}
+
+a.bouton-retour {
+    text-decoration: none;
+    color: black;
+}
+
+.form-control-label {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group {
+    width: 28.5vw;
+}
+
+.btn {
+    font-family: 'Poppins', sans-serif;
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+    color: black;
+}
+
+.btn-primary {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+	padding: 10px 15px;
+    border-color: black;
+    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	max-width: 180px;
+	text-decoration: none;
+}
+
+.btn-primary:hover {
+	color: white;
+	box-shadow: rgb(0, 0, 0) 0 80px 0px 2px inset;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: black;
+}
