@@ -1,7 +1,13 @@
-body {
-background-image: url("../static/images/arriere_plan.png");
-background-repeat: no-repeat;
-background-size: cover;
+.photos-arriere-plan {
+  height: 90vh;
+  width:100%;
+  z-index: 0;
+}
+
+.barre-transition {
+  height: 10vh;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
 }
 
 header {

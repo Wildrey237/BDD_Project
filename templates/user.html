@@ -8,67 +8,49 @@
       <div class="menu-deroulant">
         <button onclick="myFunction()" class="bouton">☰</button>
         <div id="fonction-bouton" class="contenu-menu-deroulant">
-          <a class="liens" href="#">Espagne</a>
-          <a class="liens" href="#">France</a>
-          <a class="liens" href="#">Angleterre</a>
-          <a class="liens" href="#">Italie</a>
-          <a class="liens" href="#">Allemagne</a>
-          <a class="liens" href="#">Turquie</a>
-          <a class="liens" href="#">Autriche</a>
-          <a class="liens" href="#">Suisse</a>
-          <a class="liens" href="#">Grèce</a>
-          <a class="liens" href="#">Pays-Bas</a>
+          <a class="liens" href="#0">Espagne</a>
+          <a class="liens" href="#1">France</a>
+          <a class="liens" href="#2">Angleterre</a>
+          <a class="liens" href="#3">Italie</a>
+          <a class="liens" href="#4">Allemagne</a>
+          <a class="liens" href="#5">Turquie</a>
+          <a class="liens" href="#6">Autriche</a>
+          <a class="liens" href="#7">Suisse</a>
+          <a class="liens" href="#8">Grèce</a>
+          <a class="liens" href="#9">Pays-Bas</a>
         </div>
       </div>
     </header>
 
     <h1>Venez visiter les différents pays grâce à nos différents circuits !</h1>
-    <form method="POST">
-            <table>
-            <thead>
-                <tr>
-                    <th>Valide</th>
-                    <th>Descriptif</th>
-                    <th>Date de depart</th>
-                    <th>Nombre de place</th>
-                    <th>Durée en jours</th>
-                    <th>Prix</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for post in posts %}
-                    <tr>
-                        <td>
-                            <input type="button" name="id" value= {{post[0]}}>
-                        </td>
+        {% for post in posts %}
+            <section>
+                <form method="POST">
+                    <div>
+                        <input type="checkbox" name="id" value= {{post[0]}}>
+                    </div>
 
-                        <td>
-                             {{ post[1] }}<br>
-                        </td>
-                        <td>
-                             {{ post[2] }}<br>
-                        </td>
-                        <td>
-                             {{ post[3] }}<br>
-                        </td>
-                        <td>
-                             {{ post[4] }}<br>
-                        </td>
-                        <td>
-                             {{ post[5] }}<br>
-                        </td>
-                        <td>
-                            image
-                        </td>
-                    </tr>
+                    <div>
+                    Descriptif : {{ post[1] }}<br>
+                    </div>
+                    <div>
+                    Date de départ : {{ post[2] }}<br>
+                    </div>
+                    <div>
+                    Nombre de places : {{ post[3] }}<br>
+                    </div>
+                    <div>
+                    Durée en jours : {{ post[4] }}<br>
+                    </div>
+                    <div>
+                    Prix : {{ post[5] }}<br>
+                    </div>
+                    <button type="submit" value= {{post[0]}}>Réserver</button>
+                </form>
+                <div class="barre-transition" id={{post[0]}}></div>
+            </section>
+                    
+        {% endfor %}
 
-                {% endfor %}
-            </tbody>
-        </table>
-        <button type="submit">Réserver</button>
-    </form>
-    <div>
-
-    </div>
 
 {% endblock %}
