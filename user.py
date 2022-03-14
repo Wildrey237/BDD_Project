@@ -13,8 +13,8 @@ Bootstrap(app)
 
 def User():
     cookie = session['user']['info']
-
-    if cookie[3] is True:
+    print(f"les cookies du user sont{cookie}")
+    if cookie[0] == 0 and cookie[3] is True:
         title = 'formulaire'
         sql = """SELECT Circuit.ID,Circuit.descriptif, Circuit.dateDepart, Circuit.nbrPlacesDisponibles, Circuit.dureeEnJours, Circuit.prixInscription, Media.images
                 FROM Circuit

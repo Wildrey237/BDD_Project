@@ -13,8 +13,8 @@ Bootstrap(app)
 
 def Admin():
     cookie = session['user']['info']
-
-    if cookie[3] is True:
+    print(f"les cookies du admin sont{cookie}")
+    if cookie[0] == 1 and cookie[3] is True:
         title = 'admin'
         retourner = render_template('admin.html', title=title, posts='hello admin' )
     else:
