@@ -61,7 +61,7 @@ def LogUser():
     session['user'] = {"info": cookie}
     print(session['user']['info'])
     title = 'login'
-    result = render_template('utilisateur-connexion-inscription.html', form=form, title=title)
+    result = render_template('login.html', form=form, title=title)
     if cookie[3] is True:
         if role == 1:
             result = redirect('/admin')
