@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 01 mars 2022 à 12:11
+-- Généré le : lun. 14 mars 2022 à 15:59
 -- Version du serveur :  10.3.34-MariaDB-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -77,7 +77,10 @@ CREATE TABLE `Compte` (
 
 INSERT INTO `Compte` (`compteID`, `nom`, `prenom`, `mdp`, `DateDeNaissance`, `role`, `email`) VALUES
 (1, 'Client', 'Jevisite', 'clientjevisite', '2003-09-29', 0, 'jesuisunclient@gmail.com'),
-(2, 'Administrateur', 'root', 'root', '2003-06-29', 1, 'jesuisunadmin@gmail.com');
+(2, 'Administrateur', 'root', 'root', '2003-06-29', 1, 'jesuisunadmin@gmail.com'),
+(3, 'Bastien', 'Bastien', 'Bastien', '2022-03-14', 0, 'bastien@gmail.com'),
+(4, 'Axel', 'Axel', 'Axel', '1999-10-24', 1, 'axel@gmail.com'),
+(5, 'Will', 'Will', 'Will', '2022-02-02', 0, 'will@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -231,6 +234,22 @@ CREATE TABLE `Media` (
   `images` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `Media`
+--
+
+INSERT INTO `Media` (`mediaID`, `LieuDeVisite_ID`, `images`) VALUES
+(1, 1, 'https://wallpaper.dog/large/5513585.jpg'),
+(2, 6, 'https://wallpaperaccess.com/full/3212629.jpg'),
+(3, 11, 'https://s2.best-wallpaper.net/wallpaper/1920x1080/1207/United-Kingdom-London_1920x1080.jpg'),
+(4, 16, 'https://wallpaperaccess.com/full/46389.jpg'),
+(5, 21, 'https://s1.1zoom.me/b5361/981/Bridges_Rivers_Houses_Germany_Frankfurt_Evening_534232_1920x1080.jpg'),
+(6, 26, 'https://s1.1zoom.me/b5050/16/Istanbul_Turkey_Houses_Temples_Birds_Clouds_512150_1920x1080.jpg'),
+(7, 31, 'https://s1.1zoom.me/b6553/608/Hallstatt_Austria_Houses_Mountains_Lake_Marinas_564005_1920x1080.jpg'),
+(8, 36, 'https://wallpaperaccess.com/full/1093978.jpg'),
+(9, 41, 'https://images.alphacoders.com/905/thumb-1920-905325.jpg'),
+(10, 46, 'https://s1.1zoom.me/b5050/9/Netherlands_Houses_481051_1920x1080.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -281,6 +300,14 @@ CREATE TABLE `Reservation` (
   `CircuitID` int(11) NOT NULL,
   `dateReservation` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `Reservation`
+--
+
+INSERT INTO `Reservation` (`compteReservationID`, `CircuitID`, `dateReservation`) VALUES
+(1, 8, '2022-12-15 15:23:44'),
+(1, 10, '2022-03-17 15:23:13');
 
 -- --------------------------------------------------------
 
@@ -433,7 +460,7 @@ ALTER TABLE `Circuit`
 -- AUTO_INCREMENT pour la table `Compte`
 --
 ALTER TABLE `Compte`
-  MODIFY `compteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `compteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `LieuDeVisite`
@@ -445,7 +472,7 @@ ALTER TABLE `LieuDeVisite`
 -- AUTO_INCREMENT pour la table `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `mediaID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mediaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `Pays`
