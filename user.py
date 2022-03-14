@@ -13,7 +13,6 @@ Bootstrap(app)
 
 def User():
     cookie = session['user']['info']
-    print(f"du coté user les sessions sont{cookie}")
 
     if cookie[3] is True:
         title = 'formulaire'
@@ -27,12 +26,9 @@ def User():
             db_instance = DBSingleton.Instance()
             temp = db_instance.query(sql)
             idcompte = temp[0][0]
-            print(f"les id sont {idcompte}")
             idcircuit = request.form['id']
             date = datetime.now()
             date = date.strftime("%Y-%m-%d %H:%M:%S")
-            print(date)
-            print(idcircuit)
             try:
                 record = (idcompte, idcircuit, date)
                 sql = "INSERT INTO Reservation (compteReservationID, CircuitID, dateReservation) VALUES (%s,%s,'%s')" % record
