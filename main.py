@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, Blueprint, make_response
+from flask import Flask, render_template, redirect, url_for, flash, request, Blueprint, make_response,session
 from flask_bootstrap import Bootstrap
 from auth import LogUser
 from insert import addUser
@@ -11,6 +11,7 @@ Bootstrap(app)
 if __name__ == '__main__':
     @app.route('/')
     def index():
+        session['user'] = {"info": 'None'}
         return render_template('index.html')
 
     @app.route('/login', methods=['POST', 'GET'])

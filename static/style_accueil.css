@@ -1,7 +1,20 @@
-.photos-arriere-plan {
+section {
+  position: relative;
+}
+
+.bloc_reservation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 15vh;
+  width: 15vh;
+  background-color: aliceblue;
+}
+
+.img_arriere {
   height: 90vh;
   width:100%;
-  z-index: 0;
 }
 
 .barre-transition {
@@ -83,37 +96,4 @@ header {
 
 .montrer {
   display:block;
-}
-
-.head_items {
-    border-radius: 50%;
-    padding: 0.25rem;
-    background-color: #fff;
-    max-width: 100%;
-    height: auto;
-}
-
-.tete {
-    display: flex;
-    width: 11%;
-    justify-content: space-evenly;
-}
-
-.head_items {
-    border-radius: 50%;
-    padding: 0.25rem;
-    background-color: #fff;
-    max-width: 100%;
-    height: auto;
-}
-
-.fond {
-   align-items: center;
-   justify-content: center;
-}
-
-.texte_head {
-    color: white;
-    text-shadow: 4px 4px 4px black;
-    font-size: 20px;
 }
