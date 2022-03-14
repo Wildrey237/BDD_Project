@@ -12,8 +12,8 @@ header {
   height: 10vh;
   width: 100%;
   z-index: 2;
-  background-color: rgb(235, 235, 235);
-  font-family: 'The Nautigal', cursive;
+  background-color: rgb(240, 240, 240);
+	font-family: 'Poppins', sans-serif;
 }
 
 .logo {
@@ -27,7 +27,7 @@ header {
 
 .titre-header {
   text-align: center;
-  font-size: 10vh;
+  font-size: 7vh;
 }
 
 .bouton {
@@ -36,7 +36,7 @@ header {
   font-size: 5vh;
   border:0;
   cursor: pointer;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(240, 240, 240);
 }
 
 .contenu-menu-deroulant {
@@ -44,8 +44,8 @@ header {
   position: absolute;
   top: 10vh;
   right: 0%;
-  height: 40vh;
-  width: 25vw;
+  height: 60vh;
+  width: 20vw;
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
@@ -57,13 +57,13 @@ header {
 }
 
 .contenu-menu-deroulant a:hover {
-  background-color: rgba(255, 202, 56, 0.7);
+  background-color: rgb(240, 240, 240);
 }
 
 .liens {
   text-align: center;
-  height: 10vh;
-  font-size: 7vh;
+  height: 6vh;
+  font-size: 5vh;
 }
 
 .montrer {

@@ -3,21 +3,21 @@
 {% block content %}
 
     <header>
-      <img class="logo" type="png" src="../images/logo.png">
+      <img class="logo" type="png" src="../static/images/logo.png">
       <h1 class=titre-header>HappyFly</h1>
       <div class="menu-deroulant">
         <button onclick="myFunction()" class="bouton">☰</button>
         <div id="fonction-bouton" class="contenu-menu-deroulant">
-          <a class="liens" href="#lien-espagne">Espagne</a>
-          <a class="liens" href="#lien-france">France</a>
-          <a class="liens" href="#lien-angleterre">Angleterre</a>
-          <a class="liens" href="#lien-italie">Italie</a>
-          <a class="liens" href="#lien-allemagne">Allemagne</a>
-          <a class="liens" href="#lien-turquie">Turquie</a>
-          <a class="liens" href="#lien-autriche">Autriche</a>
-          <a class="liens" href="#lien-suisse">Suisse</a>
-          <a class="liens" href="#lien-grece">Grèce</a>
-          <a class="liens" href="#lien-pays-bas">Pays-Bas</a>
+          <a class="liens" href="#">Espagne</a>
+          <a class="liens" href="#">France</a>
+          <a class="liens" href="#">Angleterre</a>
+          <a class="liens" href="#">Italie</a>
+          <a class="liens" href="#">Allemagne</a>
+          <a class="liens" href="#">Turquie</a>
+          <a class="liens" href="#">Autriche</a>
+          <a class="liens" href="#">Suisse</a>
+          <a class="liens" href="#">Grèce</a>
+          <a class="liens" href="#">Pays-Bas</a>
         </div>
       </div>
     </header>
@@ -39,7 +39,7 @@
                 {% for post in posts %}
                     <tr>
                         <td>
-                            <input type="checkbox" name="id" value= {{post[0]}}>
+                            <input type="button" name="id" value= {{post[0]}}>
                         </td>
 
                         <td>
@@ -71,7 +71,4 @@
 
     </div>
 
-    <footer>
-        <script src="../javascript/menu-deroulant.js"></script>
-      </footer>
 {% endblock %}
