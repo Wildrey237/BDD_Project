@@ -4,6 +4,11 @@
   z-index: 0;
 }
 
+.img_arriere {
+  background-size: cover;
+  z-index: 0;
+}
+
 .barre-transition {
   height: 10vh;
   width: 100%;
