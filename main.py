@@ -1,8 +1,9 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, Blueprint, make_response
+from flask import Flask, render_template, redirect, url_for, flash, request, Blueprint, make_response,session
 from flask_bootstrap import Bootstrap
 from auth import LogUser
 from insert import addUser
 from  user import User
+from admin import Admin
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this is a secret'
@@ -10,6 +11,7 @@ Bootstrap(app)
 if __name__ == '__main__':
     @app.route('/')
     def index():
+        session['user'] = {"info": 'None'}
         return render_template('index.html')
 
     @app.route('/login', methods=['POST', 'GET'])
@@ -26,8 +28,7 @@ if __name__ == '__main__':
 
     @app.route('/admin')
     def sessionAdmin():
-        var = "hello sudo"
-        return var
+        return Admin()
 
 if __name__ == '__main__':
     app.run(debug=True)
