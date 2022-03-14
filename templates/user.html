@@ -4,7 +4,7 @@
 
     <header>
       <img class="logo" type="png" src="../static/images/logo.png">
-      <img class="deconnexion" type="png" src="../static/images/porte_deconnexion.png">
+      <a class="deconnexion" href="http://127.0.0.1:5000/"><img class="deconnexion" type="png" src="../static/images/porte_deconnexion.png"></a>
       <h1 class=titre-header>HappyFly</h1>
       <div class="menu-deroulant">
         <button onclick="myFunction()" class="bouton">☰</button>
@@ -29,13 +29,14 @@
         <section>
           <img class="img_arriere" src={{ post[6] }}>
           <div class="bloc_reservation">
-            <input type="radio" name="id" value= {{post[0]}}>
-            Descriptif : {{ post[1] }}<br>
+            <a href="http://127.0.0.1:5000/form" class="details" type="submit">+</a>
+            <input type="radio" name="id" value= {{post[0]}}><br>
+            Descriptif :<br> {{ post[1] }}<br>
             Date de départ : {{ post[2] }}<br>
             Nombre de places : {{ post[3] }}<br>
             Durée en jours : {{ post[4] }}<br>
-            Prix : {{ post[5] }}<br>
-            <button type="submit" value= {{post[0]}}>Réserver</button>
+            Prix : {{ post[5] }} €<br>
+            <button class="taille" type="submit" value= {{post[0]}}>Réserver</button>
           </div>
         </section>
         <div class="barre-transition" id={{post[0]}}></div>

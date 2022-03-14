@@ -7,9 +7,30 @@ section {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 15vh;
-  width: 15vh;
-  background-color: aliceblue;
+  height: 45vh;
+  width: 92vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  line-height:5.5vh;
+  border-radius: 5px;
+  color: white;
+}
+
+.taille {
+  font-size: 3vh;
+  border-radius: 25px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.details {
+  right: 3vh;
+  margin-top: 2vh;
+  position: absolute;
+  font-size: 5vh;
+  text-decoration: none;
+  color: white;
 }
 
 .img_arriere {
@@ -26,9 +47,9 @@ section {
 .deconnexion {
   display: flex;
   position: absolute;
-  margin-left: 10vw;
+  margin-left: 5vw;
   width: 3vw;
-  margin-top: 2vh;
+  margin-top: 1vh;
   height: auto;
 }
 
