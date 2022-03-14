@@ -44,7 +44,7 @@ def addUser():
             sql = "INSERT INTO Compte ( nom, prenom, mdp, email, DateDeNaissance, role) VALUES ('%s','%s','%s','%s','%s',%s);" % record
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
-            retourner = redirect('/connect')
+            retourner = redirect('/')
     return retourner
 
 
