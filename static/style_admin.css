@@ -1,5 +1,6 @@
 body {
-    background-image : url(https://wallpapercave.com/wp/wp2508307.jpg)
+    background-image : url(https://wallpapercave.com/wp/wp2508307.jpg);
+    background-size: cover;
 }
 .Menu_Admin{
     display : flex;
@@ -9,7 +10,84 @@ body {
     height : 100vh;
 }
 .menu_actif{
-      width: 25%;
-      height: 10vh;
-      font-size: 1.2em;
+    width: 25%;
+    height: 10vh;
+    font-size: 1.2em;
+    font-family: 'Poppins', sans-serif;
+}
+
+.deconnexion {
+    display: flex;
+    position: absolute;
+    margin-left: 5vw;
+    width: 3vw;
+    margin-top: 1vh;
+    height: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0%;
+    height: 10vh;
+    width: 100%;
+    z-index: 2;
+    background-color: rgb(240, 240, 240);
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo {
+    height: 7.5vh;
+    width: auto;
+    border-radius: 50vh;
+    margin-left: 2vw;
+    margin-top: 1.25vh;
+    background-color: rgb(0, 0, 0);
+}
+
+.titre-header {
+    text-align: center;
+    font-size: 7vh;
+    font-family: 'The Nautigal', cursive;
+}
+
+.bouton {
+    margin-right: 2vw;
+    margin-top: 2vh;
+    font-size: 5vh;
+    border:0;
+    cursor: pointer;
+    background-color: rgb(240, 240, 240);
+}
+
+.contenu-menu-deroulant {
+    display: none;
+    position: absolute;
+    top: 10vh;
+    right: 0%;
+    height: 60vh;
+    width: 20vw;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.contenu-menu-deroulant a {
+    display: block;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+.contenu-menu-deroulant a:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+.liens {
+    text-align: center;
+    height: 6vh;
+    font-size: 5vh;
+}
+
+.montrer {
+    display:block;
 }
