@@ -1,0 +1,26 @@
+{% extends 'baseAdmin.html' %}
+
+{% block title %}  {{ title }}  {% endblock %}
+
+
+{% block content %}
+
+<div>
+    <div>
+        {{ posts }}
+    </div>
+    <div class ="Formulaire">
+        <form action="" method="POST">
+            <div>
+                <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom">
+            </div>
+            <div>
+                <label for="Pays_paysID">Pays associé :</label>
+            <input type="number" id="Pays_paysID" name="Pays_paysID">
+            </div>
+            <input type="submit">
+        </form>
+    </div>
+</div>
+{% endblock %}
