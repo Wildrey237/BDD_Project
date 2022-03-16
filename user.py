@@ -16,11 +16,13 @@ def User():
     print(f"les cookies du user sont{cookie}")
     if cookie[0] == 0 and cookie[3] is True:
         title = 'formulaire'
-        sql = """SELECT Circuit.ID,Circuit.descriptif, Circuit.dateDepart, Circuit.nbrPlacesDisponibles, Circuit.dureeEnJours, Circuit.prixInscription, Media.images
-                FROM Circuit
-                JOIN Etape ON Circuit.ID = Etape.Circuit_ID
-                JOIN LieuDeVisite ON Etape.LieuDeVisite_ID = LieuDeVisite.ID
-                JOIN Media ON LieuDeVisite.ID = Media.LieuDeVisite_ID"""
+        sql = """SELECT Circuit.ID,Circuit.descriptif, Circuit.dateDepart, Circuit.nbrPlacesDisponibles, Circuit.dureeEnJours, Circuit.prixInscription, Media.images paysID, Pays.nom
+                 FROM Circuit
+                 JOIN Etape ON Circuit.ID = Etape.Circuit_ID
+                 JOIN LieuDeVisite ON Etape.LieuDeVisite_ID = LieuDeVisite.ID
+                 JOIN Media ON LieuDeVisite.ID = Media.LieuDeVisite_ID
+                 JOIN Ville ON Ville.villeID = Circuit.villeDepartID
+                 JOIN Pays ON Pays.paysID = Ville.Pays_paysID"""
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
 
