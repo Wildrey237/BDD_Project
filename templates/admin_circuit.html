@@ -6,43 +6,46 @@
 {% block content %}
 
 <div>
-    <div>
-        {{ posts }}
-    </div>
     <div class ="Formulaire">
-        <form action="/my-handling-form-page" method="post">
+        <form method="POST">
             <div>
                 <label for="descriptif">Descriptif :</label>
-            <input type="text" id="descriptif" name="descriptif">
+                <textarea id="descriptif" name="descriptif"></textarea>
             </div>
             <div>
                 <label for="date">Date de départ :</label>
-            <input type="date" id="date" name="dateDepart">
+                <input type="date" id="date" name="dateDepart">
             </div>
             <div>
                 <label for="places">Nombre de places :</label>
-            <input type="number" id="places" name="nbrPlacesDisponibles">
+                <input type="number" id="places" name="nbrPlacesDisponibles">
             </div>
             <div>
                 <label for="dureeEnJours">Durée en jours :</label>
-            <input type="number" id="dureeEnJours" name="dureeEnJours">
+                <input type="number" id="dureeEnJours" name="dureeEnJours">
             </div>
             <div>
                 <label for="prixInscription">Prix inscription :</label>
-            <input type="number" id="prixInscription" name="prixInscription">
+                <input type="number" id="prixInscription" name="prixInscription">
             </div>
             <div>
                 <label for="villeDepartID">Ville de départ:</label>
-            <input type="number" id="villeDepartID" name="villeDepartID">
+                <select id="villeDepartID" name="villeDepartID">
+                    {% for post in posts %}
+                        <option value={{ post[0] }} >{{ post[1] }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div>
                 <label for="villeArriveeID">Ville d'arrivée :</label>
-            <input type="number" id="villeArriveeID" name="villeArriveeID">
+                <select id="villeArriveeID" name="villeArriveeID">
+                    {% for post in posts %}
+                        <option value={{ post[0] }} >{{ post[1] }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            <input type="submit">
+           <button class="taille" type="submit">Réserver</button>
         </form>
-
-
     </div>
 </div>
 {% endblock %}
