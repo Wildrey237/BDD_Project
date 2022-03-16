@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from auth import LogUser
 from insert import addUser
 from  user import User
-from admin import Admin, ModifCircuit
+from admin import Admin, ModifCircuit, CreateCircuit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this is a secret'
@@ -31,9 +31,14 @@ if __name__ == '__main__':
         return Admin()
 
 
-    @app.route('/admin-circuit', methods=['GET', 'POST'])
-    def CircuitAdmin():
+    @app.route('/admin-circuit-modify', methods=['GET', 'POST'])
+    def CircuitAdminM():
         return ModifCircuit()
+
+
+    @app.route('/admin-circuit-create', methods=['GET', 'POST'])
+    def CircuitAdminC():
+        return CreateCircuit()
 
 if __name__ == '__main__':
     app.run(debug=True)
