@@ -2,6 +2,16 @@ section {
   position: relative;
 }
 
+.titre-pays {
+  position: absolute;
+  top: 5%;
+  transform: translate(-50%);
+  left: 50%;
+  color: white;
+  font-family: 'The Nautigal', cursive;
+  font-size: 8vh;
+}
+
 .bloc_reservation {
   position: absolute;
   top: 50%;
