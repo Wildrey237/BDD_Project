@@ -1,0 +1,40 @@
+{% extends 'baseAdmin.html' %}
+
+{% block title %}  {{ title }}  {% endblock %}
+
+
+{% block content %}
+
+<div>
+    <div>
+        {{ posts }}
+    </div>
+    <div class ="Formulaire">
+        <form action="/my-handling-form-page" method="post">
+            <div>
+                <label for="ordre">Descriptif :</label>
+            <input type="number" id="ordre" name="ordre">
+            </div>
+            <div>
+                <label for="dateEtape">Date de l'étape :</label>
+            <input type="date" id="dateEtape" name="dateEtape">
+            </div>
+            <div>
+                <label for="dureeEnMinutes">Durée en minutes :</label>
+            <input type="number" id="dureeEnMinutes" name="dureeEnMinutes">
+            </div>
+            <div>
+                <label for="circuit_ID">Circuit associé :</label>
+            <input type="number" id="circuit_ID" name="circuit_ID">
+            </div>
+            <div>
+                <label for="LieuDeVisite_ID">Lieu de visite associée :</label>
+            <input type="number" id="LieuDeVisite_ID" name="LieuDeVisite_ID">
+            </div>
+            <input type="submit">
+        </form>
+
+
+    </div>
+</div>
+{% endblock %}
