@@ -25,8 +25,7 @@ def User():
                  JOIN Pays ON Pays.paysID = Ville.Pays_paysID"""
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-
-        retourner = render_template('user.html', title=title, posts=posts )
+        retourner = render_template('user.html', title=title, posts=posts)
 
         if request.method == 'POST':
             sql = f"SELECT Compteid FROM Compte WHERE email = '{cookie[1]}' AND mdp = '{cookie[2]}'"
