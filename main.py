@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, request, Blu
 from flask_bootstrap import Bootstrap
 from auth import LogUser
 from insert import addUser
-from  user import User
+from  user import User, reservation
 from admin import Admin, ModifCircuit, CreateCircuit
 
 app = Flask(__name__)
@@ -26,12 +26,17 @@ if __name__ == '__main__':
     def sessionUser():
         return User()
 
+
+    @app.route('/user-reservation', methods=['GET', 'POST'])
+    def reservationUser():
+        return reservation()
+
     @app.route('/admin')
     def sessionAdmin():
         return Admin()
 
 
-    @app.route('/admin-circuit-modify', methods=['GET', 'POST'])
+    @app.route('/admin-circuit-reservation', methods=['GET', 'POST'])
     def CircuitAdminM():
         return ModifCircuit()
 
@@ -39,6 +44,7 @@ if __name__ == '__main__':
     @app.route('/admin-circuit-create', methods=['GET', 'POST'])
     def CircuitAdminC():
         return CreateCircuit()
+
 
 if __name__ == '__main__':
     app.run(debug=True)

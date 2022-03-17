@@ -1,0 +1,22 @@
+{% extends 'interface.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <section>
+          <img class="img_arriere" src={{ post[5] }}>
+          <div><h1 class="titre-pays">{{ post[7] }}</h1></div>
+          <div class="bloc_reservation">
+            <a href="http://127.0.0.1:5000/" class="details" type="submit">+</a>
+            <input type="radio" name="id" value= {{post[0]}}><br>
+            Descriptif :<br> {{ post[0] }}<br>
+            Date de départ : {{ post[1] }}<br>
+            Durée en jours : {{ post[2] }}<br>
+            Pays de reservation : {{ post[3] }}<br>
+            Date de reservation : {{ post[4] }}<br>
+            <button class="taille" type="submit">Réserver</button>
+          </div>
+        </section>
+        <div class="barre-transition" id={{post[0]}}></div>
+
+      {% endfor %}
+{% endblock %}
