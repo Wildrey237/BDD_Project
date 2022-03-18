@@ -129,3 +129,31 @@ header {
 .montrer {
   display:block;
 }
+
+.bouton-retour {
+  font-family: 'Poppins', sans-serif;
+  margin-right: 2vw;
+  margin-top: 2vh;
+  font-size: 6vh;
+  border:0;
+  cursor: pointer;
+  color: black;
+}
+
+a.bouton-retour {
+  text-decoration: none;
+  color: black;
+}
+
+.bouton-reservation {
+  display: flex;
+  position: absolute;
+  right: 5vw;
+  width: 2.5vw;
+  margin-top: 1.5vh;
+  height: auto;
+}
+
+.align-center {
+  margin-top: 9vh;
+}
