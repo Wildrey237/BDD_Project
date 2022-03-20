@@ -31,17 +31,17 @@ def CreateCircuit():
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
         taille = [1]
-        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille)
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille, name='Modify')
 
         if request.method == 'POST':
             descriptif = request.form['descriptif']
             datedepart = request.form['dateDepart']
-            NbreP = request.form['nbrPlacesDisponibles']
+            nbre_p = request.form['nbrPlacesDisponibles']
             duree = request.form['dureeEnJours']
             prix = request.form['prixInscription']
-            idDepart = request.form['villeDepartID']
-            idA = request.form['villeArriveeID']
-            record = (descriptif, datedepart, NbreP, duree, prix, idDepart, idA)
+            id_depart = request.form['villeDepartID']
+            id_arrive = request.form['villeArriveeID']
+            record = (descriptif, datedepart, nbre_p, duree, prix, id_depart, id_arrive)
             print(record)
             try:
                 sql = """INSERT INTO Circuit (descriptif, dateDepart, nbrPlacesDisponibles, dureeEnJours, prixInscription, villeDepartID, villeArriveeID) 
@@ -68,7 +68,7 @@ def ModifCircuit():
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
 
-        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille)
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille, nom = "Modify")
 
         if request.method == 'POST':
             descriptif = request.form['descriptif']
@@ -78,8 +78,6 @@ def ModifCircuit():
             prix = request.form['prixInscription']
             idDepart = request.form['villeDepartID']
             idArrive = request.form['villeArriveeID']
-            record = (descriptif, datedepart, NbreP, duree, prix, idDepart, idA)
-            print(record)
             try:
                 sql = f"""UPDATE Circuit 
                 SET descriptif = '{descriptif}', 
@@ -98,3 +96,27 @@ def ModifCircuit():
     else:
         retourner = redirect('/')
     return (retourner)
+
+
+def DeleteCircuit():
+    cookie = session['user']['info']
+    title = 'Circuit'
+    if cookie[0] == 1 and cookie[3] is True:
+        sql = """SELECT Circuit.ID,Circuit.descriptif, Circuit.dateDepart, Circuit.nbrPlacesDisponibles, Circuit.dureeEnJours, Circuit.prixInscription, Media.images, Pays.paysID, Pays.nom
+                 FROM Circuit
+                 JOIN Etape ON Circuit.ID = Etape.Circuit_ID
+                 JOIN LieuDeVisite ON Etape.LieuDeVisite_ID = LieuDeVisite.ID
+                 JOIN Media ON LieuDeVisite.ID = Media.LieuDeVisite_ID
+                 JOIN Ville ON Ville.villeID = Circuit.villeDepartID
+                 JOIN Pays ON Pays.paysID = Ville.Pays_paysID"""
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        if request.method == 'POST':
+            idcircuit = request.form['id']
+            sql = f"DELETE FROM Circuit WHERE Circuit.ID = {idcircuit}"
+            print(sql)
+            db_instance = DBSingleton.Instance()
+            db_instance.query(sql)
+            posts = 'Suppresion reussi'
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, nom ="Delete")
+    return retourner
