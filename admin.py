@@ -1,7 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, session
 from flask_wtf import FlaskForm
 from flask_bootstrap import Bootstrap
-from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField, RadioField, DateField, TextAreaField
+from wtforms import StringField, SubmitField, BooleanField, IntegerField, SelectField, DecimalField, RadioField, \
+    DateField, TextAreaField
 from wtforms.validators import DataRequired, NumberRange
 from connectDB import DBSingleton
 from datetime import datetime
@@ -16,29 +17,31 @@ def Admin():
     print(f"les cookies du admin sont{cookie}")
     if cookie[0] == 1 and cookie[3] is True:
         title = 'admin'
-        retourner = render_template('admin.html', title=title, posts='Bonjour admin' )
+        retourner = render_template('admin.html', title=title, posts='Bonjour admin')
     else:
         retourner = redirect('/')
     return retourner
 
-def ModifCircuit():
+
+def CreateCircuit():
     cookie = session['user']['info']
     title = 'Circuit'
     if cookie[0] == 1 and cookie[3] is True:
         sql = "SELECT villeID, nom FROM Ville"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        retourner = render_template('admin_circuit.html', title=title, posts=posts)
+        taille = [1]
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille, name='Modify')
 
         if request.method == 'POST':
             descriptif = request.form['descriptif']
             datedepart = request.form['dateDepart']
-            NbreP = request.form['nbrPlacesDisponibles']
+            nbre_p = request.form['nbrPlacesDisponibles']
             duree = request.form['dureeEnJours']
             prix = request.form['prixInscription']
-            idDepart = request.form['villeDepartID']
-            idA = request.form['villeArriveeID']
-            record = (descriptif, datedepart, NbreP, duree, prix, idDepart, idA)
+            id_depart = request.form['villeDepartID']
+            id_arrive = request.form['villeArriveeID']
+            record = (descriptif, datedepart, nbre_p, duree, prix, id_depart, id_arrive)
             print(record)
             try:
                 sql = """INSERT INTO Circuit (descriptif, dateDepart, nbrPlacesDisponibles, dureeEnJours, prixInscription, villeDepartID, villeArriveeID) 
@@ -51,3 +54,69 @@ def ModifCircuit():
     else:
         retourner = redirect('/')
     return (retourner)
+
+
+def ModifCircuit():
+    cookie = session['user']['info']
+    title = 'Circuit'
+    if cookie[0] == 1 and cookie[3] is True:
+        sql = "SELECT * FROM Circuit"
+        db_instance = DBSingleton.Instance()
+        taille = db_instance.query(sql)
+
+        sql = "SELECT villeID, nom FROM Ville"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille, nom = "Modify")
+
+        if request.method == 'POST':
+            descriptif = request.form['descriptif']
+            datedepart = request.form['dateDepart']
+            NbreP = request.form['nbrPlacesDisponibles']
+            duree = request.form['dureeEnJours']
+            prix = request.form['prixInscription']
+            idDepart = request.form['villeDepartID']
+            idArrive = request.form['villeArriveeID']
+            try:
+                sql = f"""UPDATE Circuit 
+                SET descriptif = '{descriptif}', 
+                dateDepart = '{datedepart}', 
+                nbrPlacesDisponibles = {NbreP}, 
+                dureeEnJours = {duree}, 
+                prixInscription = {prix}, 
+                villeDepartID = {idDepart}, 
+                villeArriveeID = {idArrive} 
+                WHERE Circuit.ID = 1;"""
+                db_instance = DBSingleton.Instance()
+                db_instance.query(sql)
+                print("good")
+            except:
+                print("faux")
+    else:
+        retourner = redirect('/')
+    return (retourner)
+
+
+def DeleteCircuit():
+    cookie = session['user']['info']
+    title = 'Circuit'
+    if cookie[0] == 1 and cookie[3] is True:
+        sql = """SELECT Circuit.ID,Circuit.descriptif, Circuit.dateDepart, Circuit.nbrPlacesDisponibles, Circuit.dureeEnJours, Circuit.prixInscription, Media.images, Pays.paysID, Pays.nom
+                 FROM Circuit
+                 JOIN Etape ON Circuit.ID = Etape.Circuit_ID
+                 JOIN LieuDeVisite ON Etape.LieuDeVisite_ID = LieuDeVisite.ID
+                 JOIN Media ON LieuDeVisite.ID = Media.LieuDeVisite_ID
+                 JOIN Ville ON Ville.villeID = Circuit.villeDepartID
+                 JOIN Pays ON Pays.paysID = Ville.Pays_paysID"""
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        if request.method == 'POST':
+            idcircuit = request.form['id']
+            sql = f"DELETE FROM Circuit WHERE Circuit.ID = {idcircuit}"
+            print(sql)
+            db_instance = DBSingleton.Instance()
+            db_instance.query(sql)
+            posts = 'Suppresion reussi'
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, nom ="Delete")
+    return retourner

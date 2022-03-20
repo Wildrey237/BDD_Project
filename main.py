@@ -2,8 +2,8 @@ from flask import Flask, render_template, redirect, url_for, flash, request, Blu
 from flask_bootstrap import Bootstrap
 from auth import LogUser
 from insert import addUser
-from  user import User
-from admin import Admin, ModifCircuit
+from  user import User, reservation
+from admin import Admin, ModifCircuit, CreateCircuit, DeleteCircuit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this is a secret'
@@ -26,14 +26,29 @@ if __name__ == '__main__':
     def sessionUser():
         return User()
 
+
+    @app.route('/user-reservation', methods=['GET', 'POST'])
+    def reservationUser():
+        return reservation()
+
     @app.route('/admin')
     def sessionAdmin():
         return Admin()
 
 
-    @app.route('/admin-circuit', methods=['GET', 'POST'])
-    def CircuitAdmin():
+    @app.route('/admin-circuit-modif', methods=['GET', 'POST'])
+    def CircuitAdminM():
         return ModifCircuit()
+
+
+    @app.route('/admin-circuit-create', methods=['GET', 'POST'])
+    def CircuitAdminC():
+        return CreateCircuit()
+
+
+    @app.route('/admin-circuit-delete', methods=['GET', 'POST'])
+    def CircuitAdminD():
+        return DeleteCircuit()
 
 if __name__ == '__main__':
     app.run(debug=True)
