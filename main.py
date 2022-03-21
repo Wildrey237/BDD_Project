@@ -3,8 +3,11 @@ from flask_bootstrap import Bootstrap
 from auth import LogUser
 from insert import addUser
 from  user import User, reservation
-from admin import Admin, ModifCircuit, CreateCircuit, DeleteCircuit, SelectCircuit, CreateVille, SelectVille, ModifyVille, DeleteVille, DeletePays, CreatePays, SelectPays, ModifyPays, DeleteUser, SelectUser, ModifyUser
-
+from admin import Admin, ModifCircuit, CreateCircuit, DeleteCircuit
+from admin import CreateVille, SelectVille, ModifyVille, DeleteVille
+from admin import SelectCircuit , DeletePays, CreatePays, SelectPays, ModifyPays
+from admin import DeleteUser, SelectUser, ModifyUser
+from admin import DeleteLieu, SelectLieu, CreateLieu, ModifyLieu
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this is a secret'
 Bootstrap(app)
@@ -129,6 +132,33 @@ if __name__ == '__main__':
     @app.route('/admin-user', methods=['GET', 'POST'])
     def Useradmin():
         return render_template('admin_compteclient.html', title='ville')
+
+
+    """////////////////////////lieudevisite////////////////////////////"""
+
+
+    @app.route('/admin-lieu-delete', methods=['GET', 'POST'])
+    def LieuAdminD():
+        return DeleteLieu()
+
+
+    @app.route('/admin-lieu-select', methods=['GET', 'POST'])
+    def LieuAdminS():
+        return SelectLieu()
+
+
+    @app.route('/admin-lieu-create', methods=['GET', 'POST'])
+    def LieuAdminc():
+        return CreateLieu()
+
+    @app.route('/admin-lieu-modify', methods=['GET', 'POST'])
+    def LieuAdminM():
+        return ModifyLieu()
+
+    @app.route('/admin-lieu', methods=['GET', 'POST'])
+    def Lieuadmin():
+        return render_template('admin_lieu.html', title='ville')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -18,31 +18,59 @@
        value="Supprimer Lieux de visite">
     </div>
 <div>
-    <div>
-        {{ posts }}
-    </div>
-    <div class ="Formulaire">
-        <form action="" method="POST">
-            <div>
-                <label for="label">Label :</label>
-            <input type="text" id="label" name="label">
-            </div>
-            <div>
-                <label for="descriptif">Descriptif :</label>
-            <input type="textarea" id="descriptif" name="descriptif">
-            </div>
-            <div>
-                <label for="prixVisite">Prix de la visite:</label>
-            <input type="number" id="prixVisite" name="prixVisite" min="0">
-            </div>
-            <div>
-                <label for="Ville_villeID">Ville associé :</label>
-            <input type="number" id="Ville_villeID" name="Ville_villeID">
-            </div>
-            <input type="submit">
-        </form>
+    {% if nom == "creer" %}
+        <div class ="Formulaire">
+            <form action="" method="POST">
+                <div>
+                    <label for="label">Label :</label>
+                <input type="text" id="label" name="label" placeholder="{{ tailles[1] }}">
+                </div>
+                <div>
+                    <label for="descriptif">Descriptif :</label>
+                <input type="textarea" id="descriptif" name="descriptif" placeholder="{{ tailles[2] }}">
+                </div>
+                <div>
+                    <label for="prixVisite">Prix de la visite:</label>
+                <input type="number" id="prixVisite" name="prixVisite" min="0" placeholder="{{ tailles[3] }}">
+                </div>
+                <div>
+                    <label for="Ville_villeID">Ville associé :</label>
+                <select id="Ville_villeID" name="Ville_villeID" placeholder="{{ tailles[4] }}">
+                        {% for post in posts %}
+                            <option value="{{ post[0] }}">{{ post[1] }}</option>
+                        {% endfor %}
+                </select>
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+    {% endif %}
 
-
-    </div>
+    {% if nom == "select" %}
+                <form method="post">
+                    <div>
+                        <label for="circuit">Ville de départ:</label>
+                        <select id="id-circuit-modif" name="id-circuit">
+                            {% for post in posts %}
+                                <option value="{{ post[0] }}">{{ post[1] }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="taille" type="submit">Modifier</button>
+                    </div>
+                </form>
+            {% endif %}
+            {% if nom == "delete" %}
+                <form method="post">
+                    <div>
+                        <label for="circuit">Ville de départ:</label>
+                        <select name="id-circuit">
+                            {% for post in posts %}
+                                <option value="{{ post[0] }}">{{ post[1] }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="taille" type="submit">Supprimer</button>
+                    </div>
+                </form>
+    {% endif %}
 </div>
 {% endblock %}
