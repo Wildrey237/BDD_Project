@@ -38,23 +38,23 @@
                         <div>
                             <label for="descriptif">Descriptif :</label>
                             <h1>{{taille[1]}}</h1>
-                            <textarea id="descriptif" name="descriptif" placeholder="{{taille[1]}}"></textarea>
+                            <textarea id="descriptif" name="descriptif" placeholder="{{taille[1]}}"required="required"></textarea>
                         </div>
                         <div>
                             <label for="date">Date de départ :</label>
-                            <input type="date" id="date" name="dateDepart" placeholder={{taille[2]}}>
+                            <input type="date" id="date" name="dateDepart" placeholder={{taille[2]}} required="required">
                         </div>
                         <div>
                             <label for="places">Nombre de places :</label>
-                            <input type="number" id="places" name="nbrPlacesDisponibles" placeholder={{taille[3]}}>
+                            <input type="number" id="places" name="nbrPlacesDisponibles" placeholder={{taille[3]}} required="required">
                         </div>
                         <div>
                             <label for="dureeEnJours">Durée en jours :</label>
-                            <input type="number" id="dureeEnJours" name="dureeEnJours" placeholder={{taille[4]}}>
+                            <input type="number" id="dureeEnJours" name="dureeEnJours" placeholder={{taille[4]}} required="required">
                         </div>
                         <div>
                             <label for="prixInscription">Prix inscription :</label>
-                            <input type="number" id="prixInscription" name="prixInscription" placeholder={{taille[5]}}>
+                            <input type="number" id="prixInscription" name="prixInscription" placeholder={{taille[5]}} required="required">
                         </div>
                         <div>
                             <label for="villeDepartID">Ville de départ:</label>
@@ -89,7 +89,7 @@
           <div><h1 class="titre-pays">{{ post[7] }}</h1></div>
           <div class="bloc_reservation">
             <a href="/" class="details" type="submit">+</a>
-            <input type="radio" name="id" value= {{post[0]}}><br>
+            <input type="radio" name="id" value= {{post[0]}} required="required"><br>
             Descriptif :<br> {{ post[1] }}<br>
             Date de départ : {{ post[2] }}<br>
             Nombre de places : {{ post[3] }}<br>
