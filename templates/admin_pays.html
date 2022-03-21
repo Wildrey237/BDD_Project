@@ -7,15 +7,15 @@
 <h1>Modifier les pays</h1>
 <br><br>
 <div class="menu">
-  <input class="modif"
+  <a href="/admin-pays-modify"><input class="modif"
    type="button"
    value="Modifier Pays">
-  <input class="modif"
+  <a href="/admin-pays-create"><input class="modif"
    type="button"
-   value="Ajouter Pays">
-  <input class="modif"
+   value="Ajouter Pays"></a>
+  <a href="/admin-pays-delete"><input class="modif"
    type="button"
-   value="Supprimer Pays">
+   value="Supprimer Pays"></a>
 </div>
 {% if nom == "creer" %}
                 <div class ="Formulaire">
@@ -32,7 +32,7 @@
 {% if nom == "delete" %}
                 <form method="post">
                     <div>
-                        <label for="circuit">Ville de départ:</label>
+                        <label for="circuit">Pays:</label>
                         <select name="id-circuit">
                             {% for post in posts %}
                                 <option value="{{ post[0] }}">{{ post[1] }}</option>
@@ -46,7 +46,7 @@
 {% if nom == "select" %}
                 <form method="post">
                     <div>
-                        <label for="circuit">Ville de départ:</label>
+                        <label for="circuit">Pays:</label>
                         <select name="id-circuit">
                             {% for post in posts %}
                                 <option value="{{ post[0] }}">{{ post[1] }}</option>
