@@ -283,8 +283,9 @@ def SelectPays():
         if request.method == "POST":
             id = request.form['id-circuit']
             print(id)
-            session['Pays'] = {'id': id}
-            retourner = redirect('/admin-ville-modify')
+            session['Pays'] = {'id-p': id}
+            print( session['Pays'])
+            retourner = redirect('/admin-pays-modify')
     else:
         retourner = redirect('/')
     return retourner
@@ -292,28 +293,20 @@ def SelectPays():
 
 def ModifyPays():
     title = 'Circuit'
-    id_pays = session['Pays']['id']
+    print(f"les cookies {session['Pays']}")
+    id_pays = session['Pays']['id-p']
     print(f'ici {id_pays}')
     if is_user_logged():
-        sql = f"SELECT * FROM Pays WHERE villeID = {id_pays}"
+        sql = f"SELECT * FROM Pays WHERE paysID = {id_pays}"
         db_instance = DBSingleton.Instance()
         taille = db_instance.query(sql)
-
-        sql = "SELECT * FROM Pays"
-        db_instance = DBSingleton.Instance()
-        post = db_instance.query(sql)
-
-        retourner = render_template('admin_villes.html', title=title, posts=post, tailles=taille[0], nom='creer')
-        idville = session['ville']['id']
+        retourner = render_template('admin_pays.html', title=title, tailles=taille[0], nom='creer')
         if request.method == 'POST':
-            nom_ville = request.form['nom']
-            id_pays = request.form['id-pays']
+            nom_pays = request.form['nom']
             id_pays = int(id_pays)
-            record = (nom_ville, id_pays)
-            print(record)
 
             try:
-                sql = f"UPDATE Ville SET nom = '{nom_ville}', Pays_paysID = {id_pays} WHERE Ville.villeID = {idville};"
+                sql = f"UPDATE Pays SET nom = '{nom_pays}' WHERE Pays.paysID = {id_pays};"
                 print(sql)
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
