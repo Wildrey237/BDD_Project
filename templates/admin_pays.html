@@ -43,4 +43,18 @@
                 </form>
 {% endif %}
 
+{% if nom == "select" %}
+                <form method="post">
+                    <div>
+                        <label for="circuit">Ville de départ:</label>
+                        <select name="id-circuit">
+                            {% for post in posts %}
+                                <option value="{{ post[0] }}">{{ post[1] }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="taille" type="submit">Supprimer</button>
+                    </div>
+                </form>
+{% endif %}
+
 {% endblock %}

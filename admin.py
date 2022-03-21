@@ -279,7 +279,7 @@ def SelectPays():
         sql = "SELECT * FROM Pays"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        retourner = render_template('admin_pays.html', title=title, posts=posts, nom='creer')
+        retourner = render_template('admin_pays.html', title=title, posts=posts, nom='select')
         if request.method == "POST":
             id = request.form['id-circuit']
             print(id)
