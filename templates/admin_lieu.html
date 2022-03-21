@@ -4,9 +4,9 @@
 
 
 {% block content %}
-<h1>Modifier les lieux de visites</h1>
+<h1 class="margin">Modifier les lieux de visites</h1>
     <br><br>
-  <div class="menu">
+  <div class="menu centrer">
       <a href="/admin-lieu-select"><input class="modif"
        type="button"
        value="Modifier Lieux de visite"></a>
@@ -19,7 +19,7 @@
     </div>
 <div>
     {% if nom == "creer" %}
-        <div class ="Formulaire">
+        <div class ="Formulaire centrer">
             <form action="" method="POST">
                 <div>
                     <label for="label">Label :</label>
@@ -47,7 +47,7 @@
     {% endif %}
 
     {% if nom == "select" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Ville de départ:</label>
                         <select id="id-circuit-modif" name="id-circuit">
@@ -60,7 +60,7 @@
                 </form>
             {% endif %}
             {% if nom == "delete" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Ville de départ:</label>
                         <select name="id-circuit">
