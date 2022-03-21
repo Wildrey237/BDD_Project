@@ -41,7 +41,7 @@
             {% if nom == "select-ville" %}
                 <form method="post">
                     <div>
-                        <label for="circuit">Ville de départ:</label>
+                        <label for="circuit">Ville:</label>
                         <select id="id-circuit-modif" name="id-circuit">
                             {% for post in posts %}
                                 <option value="{{ post[0] }}">{{ post[1] }}</option>
