@@ -1,8 +1,6 @@
 body {
     background-image : url(https://wallpapercave.com/wp/wp2508307.jpg);
     background-size: cover;
-    text-align: center;
-    justify-content: space arround;
 }
 
 .deconnexion {
@@ -94,3 +92,13 @@ h1 {
     text-align : center;
 }
 
+.margin {
+    margin: 5vh;
+}
+
+.centrer {
+    position: absolute;
+    top: 25vw;
+    left: 49.2vw;
+    transform: translate(-50%, -50%);
+}

@@ -4,9 +4,9 @@
 
 
 {% block content %}
-    <h1>Modifier les circuits</h1>
+    <h1 class="margin">Modifier les circuits</h1>
     <br><br>
-    <div class="menu">
+    <div class="menu margin">
         <a href="/admin-circuit-select"><input class="modif"
         type="button"
         value="Modifier Circuit"></a>
@@ -19,7 +19,7 @@
     </div>
     {% if nom == 'select-Modify' %}
         {{ taille }}
-        <form method="post">
+        <form method="post" class="centrer">
             <div>
                 <label for="circuit">Description:</label>
                 <select id="id-circuit" name="id-circuit">
@@ -33,7 +33,7 @@
     {% endif %}
     {% if nom == 'Modify' -%}
             <div>
-                <div class ="Formulaire">
+                <div class ="Formulaire centrer">
                     <form method="POST">
                         <div>
                             <label for="descriptif">Descriptif :</label>

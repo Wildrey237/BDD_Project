@@ -4,9 +4,9 @@
 
 
 {% block content %}
-        <h1>Modifier les villes</h1>
+        <h1 class="margin">Modifier les villes</h1>
         <br><br>
-        <div class="menu">
+        <div class="menu margin">
           <a href="/admin-ville-select"><input class="modif"
            type="button"
            value="Modifier Villes"></a>
@@ -19,7 +19,7 @@
         </div>
         <div>
             {% if nom == "creer" %}
-                <div class ="Formulaire">
+                <div class ="Formulaire centrer">
                     <form method="POST">
                         <div>
                             <label for="nom">Ville</label>
@@ -39,7 +39,7 @@
             {% endif %}
 
             {% if nom == "select-ville" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Ville:</label>
                         <select id="id-circuit-modif" name="id-circuit">
@@ -52,7 +52,7 @@
                 </form>
             {% endif %}
             {% if nom == "delete" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Ville de départ:</label>
                         <select name="id-circuit">

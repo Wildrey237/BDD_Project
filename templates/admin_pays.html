@@ -4,9 +4,9 @@
 
 
 {% block content %}
-<h1>Modifier les pays</h1>
+<h1 class="margin">Modifier les pays</h1>
 <br><br>
-<div class="menu">
+<div class="menu margin">
   <a href="/admin-pays-select"><input class="modif"
    type="button"
    value="Modifier Pays">
@@ -18,7 +18,7 @@
    value="Supprimer Pays"></a>
 </div>
 {% if nom == "creer" %}
-                <div class ="Formulaire">
+                <div class ="Formulaire centrer">
                     <form action="" method="POST">
                         <div>
                             <label for="nom">Pays</label>
@@ -30,7 +30,7 @@
             {% endif %}
 
 {% if nom == "delete" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Pays:</label>
                         <select name="id-circuit">
@@ -44,7 +44,7 @@
 {% endif %}
 
 {% if nom == "select" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Pays:</label>
                         <select name="id-circuit">

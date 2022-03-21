@@ -4,9 +4,9 @@
 
 
 {% block content %}
-<h1>Modifier les comptes clients</h1>
+<h1 class="margin">Modifier les comptes clients</h1>
 <br><br>
-<div class="menu">
+<div class="menu margin">
   <a href="/admin-user-select"><input class="modif" type="button" value="Modifier Compte Client"></a>
   <a href="/form"></a><input class="modif" type="button" value="Ajouter Compte Client">
   <a href="/admin-user-delete"><input class="modif" type="button" value="Supprimer Compte Client"></a>
@@ -14,7 +14,7 @@
 <div>
 
     {% if nom == 'creer' %}
-    <div class ="Formulaire">
+    <div class ="Formulaire centrer">
         <form action="" method="POST">
             <div>
                 <label for="nom">Nom :</label>
@@ -46,7 +46,7 @@
     {% endif %}
 
     {% if nom == "delete" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Nom du compte:</label>
                         <select name="id-circuit">
@@ -60,7 +60,7 @@
     {% endif %}
 
     {% if nom == "select" %}
-                <form method="post">
+                <form method="post" class="centrer">
                     <div>
                         <label for="circuit">Nom du compte:</label>
                         <select name="id-client">
