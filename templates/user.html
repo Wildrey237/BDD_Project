@@ -4,7 +4,7 @@
 
     <header>
       <img class="logo" type="png" src="../static/images/logo.png">
-      <a class="deconnexion" href="http://127.0.0.1:5000/"><img class="deconnexion" type="png" src="../static/images/porte_deconnexion.png"></a>
+      <a class="deconnexion" href="/"><img class="deconnexion" type="png" src="../static/images/porte_deconnexion.png"></a>
       <h1 class=titre-header>HappyFly</h1>
       <div class="menu-deroulant">
         <button onclick="myFunction()" class="bouton">☰</button>
@@ -21,7 +21,7 @@
           <a class="liens" href="#9">Pays-Bas</a>
         </div>
       </div>
-      <a class="bouton-reservation" href="http://127.0.0.1:5000/user-reservation"><img class="bouton-reservation" src="../static/images/bouton-reservation.png"></a>
+      <a class="bouton-reservation" href="/user-reservation"><img class="bouton-reservation" src="../static/images/bouton-reservation.png"></a>
     </header>
 
     <form method="POST">
@@ -31,7 +31,7 @@
           <img class="img_arriere" src={{ post[6] }}>
           <div><h1 class="titre-pays">{{ post[8] }}</h1></div>
           <div class="bloc_reservation">
-            <a href="http://127.0.0.1:5000/" class="details" type="submit">+</a>
+            <a href="/" class="details" type="submit">+</a>
             <input type="radio" name="id" value= {{post[0]}}><br>
             Descriptif :<br> {{ post[1] }}<br>
             Date de départ : {{ post[2] }}<br>

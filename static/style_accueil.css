@@ -57,9 +57,9 @@ section {
 .deconnexion {
   display: flex;
   position: absolute;
-  margin-left: 5vw;
+  margin-left: 12vw;
   width: 3vw;
-  margin-top: 1vh;
+  margin-top: 0.6vh;
   height: auto;
 }
 
@@ -92,8 +92,8 @@ header {
 
 .bouton {
   margin-right: 2vw;
-  margin-top: 2vh;
-  font-size: 5vh;
+  margin-top: 1.5vh;
+  font-size: 6vh;
   border:0;
   cursor: pointer;
   background-color: rgb(240, 240, 240);
@@ -148,9 +148,9 @@ a.bouton-retour {
 .bouton-reservation {
   display: flex;
   position: absolute;
-  right: 5vw;
+  right: 12.5vw;
   width: 2.5vw;
-  margin-top: 1.5vh;
+  margin-top: 1vh;
   height: auto;
 }
 
