@@ -160,11 +160,11 @@ def CreateVille():
         sql = "SELECT * FROM Pays"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        retourner = render_template('admin_villes.html', title=title, posts=posts, taille="", nom='creer')
+        retourner = render_template('admin_villes.html', title=title, posts=posts, tailles="", nom='creer')
 
         if request.method == 'POST':
             nom_ville = request.form['nom']
-            id_pays = request.form['id-circuit']
+            id_pays = request.form['id-pays']
             id_pays = int(id_pays)
             record = (nom_ville, id_pays)
             print(record)
@@ -257,7 +257,7 @@ def DeleteVille():
 def CreatePays():
     title = 'Circuit'
     if is_user_logged():
-        retourner = render_template('admin_pays.html', title=title, tailles="", nom='creer')
+        retourner = render_template('admin_pays.html', title=title, tailles=" ", nom='creer')
         if request.method == 'POST':
             nom_pays = request.form['nom']
             try:
