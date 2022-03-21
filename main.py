@@ -14,6 +14,7 @@ if __name__ == '__main__':
         session['user'] = {"info": 'None'}
         session['circuit'] = {"id": 'None'}
         session['ville'] = {"id": 'None'}
+        session['Pays'] = {"id-p": 'None'}
         return render_template('index.html')
 
     @app.route('/login', methods=['POST', 'GET'])
