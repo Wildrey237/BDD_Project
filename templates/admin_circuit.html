@@ -4,20 +4,19 @@
 
 
 {% block content %}
-    <h1>Modifier les circuits</h1>
+      <h1>Modifier les circuits</h1>
     <br><br>
     <div class="menu">
-    <input class="modif"
-    type="button"
-    value="Modifier Circuit">
-    <input class="modif"
-    type="button"
-    value="Ajouter Circuit">
-    <input class="modif"
-    type="button"
-    value="Supprimer Circuit">
+        <input class="modif"
+        type="button"
+        value="Modifier Circuit">
+        <input class="modif"
+        type="button"
+        value="Ajouter Circuit">
+        <input class="modif"
+        type="button"
+        value="Supprimer Circuit">
     </div>
-    <br><br>
     {% if nom == 'select-Modify' -%}
         {{ taille }}
         <form method="post">
@@ -81,9 +80,10 @@
 
     {% if nom == 'Delete' -%}
      <form method="POST">
-         {{posts}}
       {% for post in posts %}
-
+        <head>
+            <link rel="stylesheet" href="../static/style_accueil.css"/>
+        </head>
         <section>
           <img class="img_arriere" src={{ post[6] }}>
           <div><h1 class="titre-pays">{{ post[7] }}</h1></div>
