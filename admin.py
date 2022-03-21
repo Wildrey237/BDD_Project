@@ -12,10 +12,16 @@ app.config['SECRET_KEY'] = 'this is a secret'
 Bootstrap(app)
 
 
+def is_user_logged():
+    cookie = session['user']['info']
+    is_admin = 1
+    return cookie[0] == is_admin and cookie[3] is True
+
+
 def Admin():
     cookie = session['user']['info']
     print(f"les cookies du admin sont{cookie}")
-    if cookie[0] == 1 and cookie[3] is True:
+    if is_user_logged():
         title = 'admin'
         retourner = render_template('admin.html', title=title, posts='Bonjour admin')
     else:
@@ -53,7 +59,7 @@ def CreateCircuit():
                 print('pas bon')
     else:
         retourner = redirect('/')
-    return (retourner)
+    return retourner
 
 def is_user_logged():
     cookie = session['user']['info']
@@ -116,13 +122,12 @@ def ModifCircuit():
                 print("faux")
     else:
         retourner = redirect('/')
-    return (retourner)
+    return retourner
 
 
 def DeleteCircuit():
-    cookie = session['user']['info']
     title = 'Circuit'
-    if cookie[0] == 1 and cookie[3] is True:
+    if is_user_logged():
         sql = """SELECT Circuit.ID,Circuit.descriptif, Circuit.dateDepart, Circuit.nbrPlacesDisponibles, Circuit.dureeEnJours, Circuit.prixInscription, Media.images, Pays.paysID, Pays.nom
                  FROM Circuit
                  JOIN Etape ON Circuit.ID = Etape.Circuit_ID
@@ -139,26 +144,26 @@ def DeleteCircuit():
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
             posts = 'Suppresion reussi'
-        retourner = render_template('admin_circuit.html', title=title, posts=posts, nom ="Delete")
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, nom="Delete")
     return retourner
 
+
 def CreateVille():
-    cookie = session['user']['info']
     title = 'Circuit'
-    if cookie[0] == 1 and cookie[3] is True:
+    if is_user_logged():
         sql = "SELECT * FROM Pays"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        retourner = render_template('admin_villes.html', title=title, posts=posts, name='Modify')
+        retourner = render_template('admin_villes.html', title=title, posts=posts, name='CREATE')
 
         if request.method == 'POST':
             nom_ville = request.form['nom']
             id_pays = request.form['Pays_paysID']
+            id_pays = int(id_pays)
             record = (nom_ville, id_pays)
             print(record)
             try:
-                sql = """INSERT INTO Circuit (nom, Pays_paysID) 
-                    VALUES ('%s', %s);""" % (nom_ville, id_pays)
+                sql = "INSERT INTO Ville (nom, Pays_paysID) VALUES ('%s', '%s');" % record
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
@@ -166,4 +171,46 @@ def CreateVille():
                 print('pas bon')
     else:
         retourner = redirect('/')
-    return (retourner)
+    return retourner
+
+
+def SelectVille():
+    title = 'Circuit'
+    if is_user_logged():
+        sql = "SELECT * FROM Ville"
+        db_instance = DBSingleton.Instance()
+        taille = db_instance.query(sql)
+        retourner = render_template('admin_circuit.html', title=title, tailles=taille, nom="select-Modify")
+        if request.method == "POST":
+            id = request.form['id-circuit']
+            session['ville'] = {"id": id}
+            retourner = redirect('/admin-circuit-modif')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
+def ModifyVille():
+    title = 'Circuit'
+    if is_user_logged():
+        sql = "SELECT * FROM Pays"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        retourner = render_template('admin_villes.html', title=title, posts=posts, name='CREATE')
+        idville = session['circuit']['id']
+        if request.method == 'POST':
+            nom_ville = request.form['nom']
+            id_pays = request.form['Pays_paysID']
+            id_pays = int(id_pays)
+            record = (nom_ville, id_pays)
+            print(record)
+            try:
+                sql = f"UPDATE Ville SET nom = {nom_ville}, Pays_paysID = {id_pays} WHERE Ville.villeID = {idville};" % record
+                db_instance = DBSingleton.Instance()
+                db_instance.query(sql)
+                print('good')
+            except:
+                print('pas bon')
+    else:
+        retourner = redirect('/')
+    return retourner
