@@ -7,20 +7,15 @@
 <h1>Modifier les comptes clients</h1>
 <br><br>
 <div class="menu">
-  <input class="modif"
-   type="button"
-   value="Modifier Compte Client">
-  <input class="modif"
-   type="button"
-   value="Ajouter Compte CLient">
-  <input class="modif"
-   type="button"
-   value="Supprimer Compte CLient">
+  <input class="modif" type="button" value="Modifier Compte Client">
+  <input class="modif" type="button" value="Ajouter Compte CLient">
+  <input class="modif" type="button" value="Supprimer Compte CLient">
 </div>
 <div>
     <div>
         {{ posts }}
     </div>
+    {% if nom == 'select-Modify' %}
     <div class ="Formulaire">
         <form action="" method="POST">
             <div>
