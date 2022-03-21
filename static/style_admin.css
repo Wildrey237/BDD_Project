@@ -6,9 +6,9 @@ body {
 .deconnexion {
     display: flex;
     position: absolute;
-    margin-left: 5vw;
+    margin-left: 12vw;
     width: 3vw;
-    margin-top: 1vh;
+    margin-top: 0.8vh;
     height: auto;
 }
 
