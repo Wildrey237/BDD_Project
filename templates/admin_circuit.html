@@ -4,8 +4,22 @@
 
 
 {% block content %}
-    {% if nom >= 'Modify' -%}
-        {% for taille in tailles %}
+    {% if nom == 'select-Modify' -%}
+        {{ taille }}
+        <form method="post">
+            <div>
+                <label for="circuit">Ville de départ:</label>
+                <select id="id-circuit" name="id-circuit">
+                    {% for value in tailles %}
+                        <option value="{{ value[0] }}">{{ value[0] }} {{ value[1] }}</option>
+                    {% endfor %}
+                </select>
+                <button class="taille" type="submit">Modifier</button>
+            </div>
+        </form>
+    {% endif %}
+
+    {% if nom == 'Modify' -%}
             <div>
                 <div class ="Formulaire">
                     <form method="POST">
@@ -50,10 +64,9 @@
                     </form>
                 </div>
             </div>
-        {% endfor %}
     {% endif %}
 
-    {% if nom >= 'Delete' -%}
+    {% if nom == 'Delete' -%}
      <form method="POST">
          {{posts}}
       {% for post in posts %}
