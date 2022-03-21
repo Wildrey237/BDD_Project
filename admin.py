@@ -251,14 +251,13 @@ def DeleteVille():
     return retourner
 
 
-
 """////////////////////////////////////////////////////"""
 
 
 def CreatePays():
     title = 'Circuit'
     if is_user_logged():
-        retourner = render_template('admin_pays.html', title=title  , tailles="", nom='creer')
+        retourner = render_template('admin_pays.html', title=title, tailles="", nom='creer')
         if request.method == 'POST':
             nom_pays = request.form['nom']
             try:
@@ -284,7 +283,7 @@ def SelectPays():
             id = request.form['id-circuit']
             print(id)
             session['Pays'] = {'id-p': id}
-            print( session['Pays'])
+            print(session['Pays'])
             retourner = redirect('/admin-pays-modify')
     else:
         retourner = redirect('/')
@@ -339,6 +338,62 @@ def DeletePays():
 
 """/////////////////compte user////////////////////////"""
 
+
+def SelectUser():
+    title = 'User'
+    if is_user_logged():
+        sql = "SELECT * FROM Compte"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        retourner = render_template('admin_compteclient.html', title=title, posts=posts, nom='select')
+        if request.method == "POST":
+            id = request.form['id-client']
+            print(id)
+            session['User'] = {'id-u': id}
+            print(session['Pays'])
+            retourner = redirect('/admin-user-modify')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
+def ModifyUser():
+    title = 'Circuit'
+    id_compte = session['User']['id-u']
+    print(f'ici {id_compte}')
+    if is_user_logged():
+        sql = f"SELECT * FROM Compte WHERE compteID = {id_compte}"
+        db_instance = DBSingleton.Instance()
+        taille = db_instance.query(sql)
+        retourner = render_template('admin_compteclient.html', title=title, taille=taille[0], nom='creer')
+        if request.method == 'POST':
+            nom_user = request.form['nom']
+            prenom_user = request.form['prenom']
+            mdp = request.form['mdp']
+            date = request.form['DateDeNaissance']
+            role = request.form['role']
+            email = request.form['email']
+            id_compte = int(id_compte)
+
+            try:
+                sql = f"""UPDATE Compte SET nom = '{nom_user}', 
+                                            prenom = '{prenom_user}', 
+                                            `mdp` = '{mdp}', 
+                                            `DateDeNaissance` = '{date}', 
+                                            `role` = '{role}', 
+                                            `email` = '{email}' 
+                        WHERE `Compte`.`compteID` = {id_compte}"""
+                print(sql)
+                db_instance = DBSingleton.Instance()
+                db_instance.query(sql)
+                print('good')
+            except:
+                print('pas bon')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
 def DeleteUser():
     title = 'User'
     if is_user_logged():
@@ -348,7 +403,7 @@ def DeleteUser():
         retourner = render_template('admin_compteclient.html', title=title, posts=posts, nom='delete')
         if request.method == "POST":
             id = request.form['id-circuit']
-            sql = f"DELETE FROM Pays WHERE Compte.compteID = {id}"
+            sql = f"DELETE FROM Compte WHERE Compte.compteID = {id}"
             print(sql)
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
