@@ -279,7 +279,7 @@ def SelectPays():
         sql = "SELECT * FROM Pays"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        retourner = render_template('admin_villes.html', title=title, posts=posts, nom='select-ville')
+        retourner = render_template('admin_pays.html', title=title, posts=posts, nom='creer')
         if request.method == "POST":
             id = request.form['id-circuit']
             print(id)
@@ -328,6 +328,27 @@ def DeletePays():
         if request.method == "POST":
             id = request.form['id-circuit']
             sql = f"DELETE FROM Pays WHERE Pays.paysID = {id}"
+            print(sql)
+            db_instance = DBSingleton.Instance()
+            db_instance.query(sql)
+            print('bon')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
+"""/////////////////compte user////////////////////////"""
+
+def DeleteUser():
+    title = 'User'
+    if is_user_logged():
+        sql = "SELECT * FROM Compte"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        retourner = render_template('admin_compteclient.html', title=title, posts=posts, nom='delete')
+        if request.method == "POST":
+            id = request.form['id-circuit']
+            sql = f"DELETE FROM Pays WHERE Compte.compteID = {id}"
             print(sql)
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
