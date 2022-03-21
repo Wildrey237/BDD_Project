@@ -7,9 +7,9 @@
 <h1>Modifier les comptes clients</h1>
 <br><br>
 <div class="menu">
-  <input class="modif" type="button" value="Modifier Compte Client">
-  <input class="modif" type="button" value="Ajouter Compte CLient">
-  <input class="modif" type="button" value="Supprimer Compte CLient">
+  <a href="/admin-user-select"><input class="modif" type="button" value="Modifier Compte Client"></a>
+  <a href="/form"></a><input class="modif" type="button" value="Ajouter Compte CLient">
+  <a href="/admin-user-delete"><input class="modif" type="button" value="Supprimer Compte CLient"></a>
 </div>
 <div>
     <div>
@@ -50,7 +50,7 @@
     {% if nom == "delete" %}
                 <form method="post">
                     <div>
-                        <label for="circuit">Ville de départ:</label>
+                        <label for="circuit">Nom du compte:</label>
                         <select name="id-circuit">
                             {% for post in posts %}
                                 <option value="{{ post[0] }}">{{ post[1] }}</option>
@@ -64,7 +64,7 @@
     {% if nom == "select" %}
                 <form method="post">
                     <div>
-                        <label for="circuit">Ville de départ:</label>
+                        <label for="circuit">Nom du compte:</label>
                         <select name="id-client">
                             {% for post in posts %}
                                 <option value="{{ post[0] }}">{{ post[1] }}</option>
