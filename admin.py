@@ -30,8 +30,8 @@ def CreateCircuit():
         sql = "SELECT villeID, nom FROM Ville"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        taille = [1]
-        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille, name='Modify')
+        tailles = ""
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, taille=tailles, nom='Modify')
 
         if request.method == 'POST':
             descriptif = request.form['descriptif']
@@ -55,21 +55,41 @@ def CreateCircuit():
         retourner = redirect('/')
     return (retourner)
 
-
-def ModifCircuit():
+def is_user_logged():
     cookie = session['user']['info']
+    return cookie[0] == 1 and cookie[3] is True
+
+def SelectCircuit():
     title = 'Circuit'
-    if cookie[0] == 1 and cookie[3] is True:
+    if is_user_logged():
         sql = "SELECT * FROM Circuit"
         db_instance = DBSingleton.Instance()
         taille = db_instance.query(sql)
+        retourner = render_template('admin_circuit.html', title=title, tailles=taille, nom="select-Modify")
+        if request.method == "POST":
+            id = request.form['id-circuit']
+            session['circuit'] = {"id": id}
+            retourner = redirect('/admin-circuit-modif')
+    else:
+        retourner = redirect('/')
+    return retourner
 
+def ModifCircuit():
+    title = 'Circuit'
+    idcircuit = session['circuit']['id']
+    print(idcircuit)
+    if is_user_logged():
         sql = "SELECT villeID, nom FROM Ville"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
 
-        retourner = render_template('admin_circuit.html', title=title, posts=posts, tailles=taille, nom = "Modify")
+        sql = f"SELECT * FROM Circuit WHERE ID = {idcircuit}"
+        print(sql)
+        db_instance = DBSingleton.Instance()
+        tailles = db_instance.query(sql)
+        print(tailles)
 
+        retourner = render_template('admin_circuit.html', title=title, posts=posts, taille=tailles[0], nom='Modify')
         if request.method == 'POST':
             descriptif = request.form['descriptif']
             datedepart = request.form['dateDepart']
@@ -78,6 +98,7 @@ def ModifCircuit():
             prix = request.form['prixInscription']
             idDepart = request.form['villeDepartID']
             idArrive = request.form['villeArriveeID']
+
             try:
                 sql = f"""UPDATE Circuit 
                 SET descriptif = '{descriptif}', 
@@ -87,7 +108,7 @@ def ModifCircuit():
                 prixInscription = {prix}, 
                 villeDepartID = {idDepart}, 
                 villeArriveeID = {idArrive} 
-                WHERE Circuit.ID = 1;"""
+                WHERE Circuit.ID = {idcircuit};"""
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print("good")
@@ -120,3 +141,29 @@ def DeleteCircuit():
             posts = 'Suppresion reussi'
         retourner = render_template('admin_circuit.html', title=title, posts=posts, nom ="Delete")
     return retourner
+
+def CreateVille():
+    cookie = session['user']['info']
+    title = 'Circuit'
+    if cookie[0] == 1 and cookie[3] is True:
+        sql = "SELECT * FROM Pays"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        retourner = render_template('admin_villes.html', title=title, posts=posts, name='Modify')
+
+        if request.method == 'POST':
+            nom_ville = request.form['nom']
+            id_pays = request.form['Pays_paysID']
+            record = (nom_ville, id_pays)
+            print(record)
+            try:
+                sql = """INSERT INTO Circuit (nom, Pays_paysID) 
+                    VALUES ('%s', %s);""" % (nom_ville, id_pays)
+                db_instance = DBSingleton.Instance()
+                db_instance.query(sql)
+                print('good')
+            except:
+                print('pas bon')
+    else:
+        retourner = redirect('/')
+    return (retourner)

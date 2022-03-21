@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from auth import LogUser
 from insert import addUser
 from  user import User, reservation
-from admin import Admin, ModifCircuit, CreateCircuit, DeleteCircuit
+from admin import Admin, ModifCircuit, CreateCircuit, DeleteCircuit, SelectCircuit, CreateVille
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this is a secret'
@@ -49,6 +49,16 @@ if __name__ == '__main__':
     @app.route('/admin-circuit-delete', methods=['GET', 'POST'])
     def CircuitAdminD():
         return DeleteCircuit()
+
+
+    @app.route('/admin-circuit-select', methods=['GET', 'POST'])
+    def CircuitAdminS():
+        return SelectCircuit()
+
+
+    @app.route('/admin-ville-create', methods=['GET', 'POST'])
+    def VilleAdminC():
+        return CreateVille()
 
 if __name__ == '__main__':
     app.run(debug=True)
