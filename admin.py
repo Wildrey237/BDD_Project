@@ -23,7 +23,7 @@ def Admin():
     print(f"les cookies du admin sont{cookie}")
     if is_user_logged():
         title = 'admin'
-        retourner = render_template('admin.html', title=title, posts='Bonjour admin')
+        retourner = render_template('admin.html', title=title, posts='')
     else:
         retourner = redirect('/')
     return retourner
