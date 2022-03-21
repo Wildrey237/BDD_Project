@@ -55,6 +55,10 @@ if __name__ == '__main__':
     def CircuitAdminS():
         return SelectCircuit()
 
+    @app.route('/admin-circuit', methods=['GET', 'POST'])
+    def CircuitAdmin():
+        return render_template('admin_circuit.html', title='Circuit')
+
 
     @app.route('/admin-ville-create', methods=['GET', 'POST'])
     def VilleAdminC():
