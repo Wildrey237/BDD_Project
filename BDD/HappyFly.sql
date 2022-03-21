@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 14 mars 2022 à 15:59
+-- Généré le : lun. 21 mars 2022 à 23:13
 -- Version du serveur :  10.3.34-MariaDB-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -241,8 +241,8 @@ CREATE TABLE `Media` (
 INSERT INTO `Media` (`mediaID`, `LieuDeVisite_ID`, `images`) VALUES
 (1, 1, 'https://wallpaper.dog/large/5513585.jpg'),
 (2, 6, 'https://wallpaperaccess.com/full/3212629.jpg'),
-(3, 11, 'https://s2.best-wallpaper.net/wallpaper/1920x1080/1207/United-Kingdom-London_1920x1080.jpg'),
-(4, 16, 'https://wallpaperaccess.com/full/46389.jpg'),
+(3, 11, '\r\nhttps://voyage-onirique.com/wp-content/uploads/2018/08/WallpaperStudio10-195714-1920x1080.jpg'),
+(4, 16, 'https://a-static.besthdwallpaper.com/grand-canal-a-venise-italie-fond-d-ecran-1920x1080-28631_48.jpg'),
 (5, 21, 'https://s1.1zoom.me/b5361/981/Bridges_Rivers_Houses_Germany_Frankfurt_Evening_534232_1920x1080.jpg'),
 (6, 26, 'https://s1.1zoom.me/b5050/16/Istanbul_Turkey_Houses_Temples_Birds_Clouds_512150_1920x1080.jpg'),
 (7, 31, 'https://s1.1zoom.me/b6553/608/Hallstatt_Austria_Houses_Mountains_Lake_Marinas_564005_1920x1080.jpg'),
@@ -306,8 +306,7 @@ CREATE TABLE `Reservation` (
 --
 
 INSERT INTO `Reservation` (`compteReservationID`, `CircuitID`, `dateReservation`) VALUES
-(1, 8, '2022-12-15 15:23:44'),
-(1, 10, '2022-03-17 15:23:13');
+(3, 1, '2022-03-21 22:10:50');
 
 -- --------------------------------------------------------
 
@@ -454,25 +453,25 @@ ALTER TABLE `Ville`
 -- AUTO_INCREMENT pour la table `Circuit`
 --
 ALTER TABLE `Circuit`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `Compte`
 --
 ALTER TABLE `Compte`
-  MODIFY `compteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `compteID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `LieuDeVisite`
 --
 ALTER TABLE `LieuDeVisite`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT pour la table `Media`
 --
 ALTER TABLE `Media`
-  MODIFY `mediaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `mediaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `Pays`
@@ -484,7 +483,7 @@ ALTER TABLE `Pays`
 -- AUTO_INCREMENT pour la table `Ville`
 --
 ALTER TABLE `Ville`
-  MODIFY `villeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `villeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Contraintes pour les tables déchargées
@@ -494,47 +493,47 @@ ALTER TABLE `Ville`
 -- Contraintes pour la table `Circuit`
 --
 ALTER TABLE `Circuit`
-  ADD CONSTRAINT `fk_Circuit_Ville1` FOREIGN KEY (`villeDepartID`) REFERENCES `Ville` (`villeID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Circuit_Ville2` FOREIGN KEY (`villeArriveeID`) REFERENCES `Ville` (`villeID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Circuit_Ville1` FOREIGN KEY (`villeDepartID`) REFERENCES `Ville` (`villeID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Circuit_Ville2` FOREIGN KEY (`villeArriveeID`) REFERENCES `Ville` (`villeID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `Etape`
 --
 ALTER TABLE `Etape`
-  ADD CONSTRAINT `fk_Etape_LieuDeVisite1` FOREIGN KEY (`LieuDeVisite_ID`) REFERENCES `LieuDeVisite` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_etape_circuit` FOREIGN KEY (`circuit_ID`) REFERENCES `Circuit` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Etape_LieuDeVisite1` FOREIGN KEY (`LieuDeVisite_ID`) REFERENCES `LieuDeVisite` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_etape_circuit` FOREIGN KEY (`circuit_ID`) REFERENCES `Circuit` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `LieuDeVisite`
 --
 ALTER TABLE `LieuDeVisite`
-  ADD CONSTRAINT `fk_LieuDeVisite_Ville1` FOREIGN KEY (`Ville_villeID`) REFERENCES `Ville` (`villeID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_LieuDeVisite_Ville1` FOREIGN KEY (`Ville_villeID`) REFERENCES `Ville` (`villeID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `Media`
 --
 ALTER TABLE `Media`
-  ADD CONSTRAINT `fk_Medias_LieuDeVisite1` FOREIGN KEY (`LieuDeVisite_ID`) REFERENCES `LieuDeVisite` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Medias_LieuDeVisite1` FOREIGN KEY (`LieuDeVisite_ID`) REFERENCES `LieuDeVisite` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `ModificationCompte`
 --
 ALTER TABLE `ModificationCompte`
-  ADD CONSTRAINT `fk_Compte_has_Compte_Compte1` FOREIGN KEY (`ModificateurCompteID`) REFERENCES `Compte` (`compteID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Compte_has_Compte_Compte2` FOREIGN KEY (`CompteModifiéID`) REFERENCES `Compte` (`compteID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Compte_has_Compte_Compte1` FOREIGN KEY (`ModificateurCompteID`) REFERENCES `Compte` (`compteID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Compte_has_Compte_Compte2` FOREIGN KEY (`CompteModifiéID`) REFERENCES `Compte` (`compteID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `Reservation`
 --
 ALTER TABLE `Reservation`
-  ADD CONSTRAINT `fk_Reservation_Circuit1` FOREIGN KEY (`CircuitID`) REFERENCES `Circuit` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Reservation_Compte1` FOREIGN KEY (`compteReservationID`) REFERENCES `Compte` (`compteID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Reservation_Circuit1` FOREIGN KEY (`CircuitID`) REFERENCES `Circuit` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Reservation_Compte1` FOREIGN KEY (`compteReservationID`) REFERENCES `Compte` (`compteID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `Ville`
 --
 ALTER TABLE `Ville`
-  ADD CONSTRAINT `fk_Ville_Pays1` FOREIGN KEY (`Pays_paysID`) REFERENCES `Pays` (`paysID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Ville_Pays1` FOREIGN KEY (`Pays_paysID`) REFERENCES `Pays` (`paysID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
