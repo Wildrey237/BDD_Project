@@ -78,3 +78,15 @@ header {
 .montrer {
     display:block;
 }
+
+.modif {
+    height : 8vh;
+}
+.menu {
+    display : flex;
+    justify-content : center;
+
+}
+h1 {
+    text-align : center;
+}
