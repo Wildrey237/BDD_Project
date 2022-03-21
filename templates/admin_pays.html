@@ -17,18 +17,30 @@
    type="button"
    value="Supprimer Pays">
 </div>
-<div>
-    <div>
-        {{ posts }}
-    </div>
-    <div class ="Formulaire">
-        <form action="" method="POST">
-            <div>
-                <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom">
-            </div>
-            <input type="submit">
-        </form>
-    </div>
-</div>
+{% if nom == "creer" %}
+                <div class ="Formulaire">
+                    <form action="" method="POST">
+                        <div>
+                            <label for="nom">Pays</label>
+                        <input type="text" id="nom" name="nom" placeholder="{{ tailles[1] }}">
+                        </div>
+                        <input type="submit">
+                    </form>
+                </div>
+            {% endif %}
+
+{% if nom == "delete" %}
+                <form method="post">
+                    <div>
+                        <label for="circuit">Ville de départ:</label>
+                        <select name="id-circuit">
+                            {% for post in posts %}
+                                <option value="{{ post[0] }}">{{ post[1] }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="taille" type="submit">Supprimer</button>
+                    </div>
+                </form>
+{% endif %}
+
 {% endblock %}
