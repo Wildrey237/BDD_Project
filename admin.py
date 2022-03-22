@@ -536,7 +536,7 @@ def CreateEtape():
         db_instance = DBSingleton.Instance()
         villes = db_instance.query(sql)
 
-        retourner = render_template('admin_etapes.html', title=title, tailles=" ", posts=posts, Villes=villes, nom='creer')
+        retourner = render_template('admin_etapes.html', places=" ",title=title, tailles=" ", posts=posts, Villes=villes, nom='creer')
         if request.method == 'POST':
             ordre = request.form['ordre']
             date = request.form['dateEtape']
@@ -563,7 +563,7 @@ def SelectEtape():
         sql = "SELECT * FROM Etape"
         db_instance = DBSingleton.Instance()
         posts = db_instance.query(sql)
-        retourner = render_template('admin_etapes.html', title=title, places=" ", posts=posts, nom='select')
+        retourner = render_template('admin_etapes.html', title=title, posts=posts, nom='select')
         if request.method == "POST":
             role = request.form['id-circuit']
             print(role)
