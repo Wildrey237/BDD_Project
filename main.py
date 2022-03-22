@@ -8,6 +8,8 @@ from admin import CreateVille, SelectVille, ModifyVille, DeleteVille
 from admin import SelectCircuit , DeletePays, CreatePays, SelectPays, ModifyPays
 from admin import DeleteUser, SelectUser, ModifyUser
 from admin import DeleteLieu, SelectLieu, CreateLieu, ModifyLieu
+from admin import DeleteEtape, SelectEtape, CreateEtape, ModifyEtape
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'this is a secret'
 Bootstrap(app)
@@ -40,7 +42,6 @@ if __name__ == '__main__':
     @app.route('/admin')
     def sessionAdmin():
         return Admin()
-
 
     @app.route('/admin-circuit-modif', methods=['GET', 'POST'])
     def CircuitAdminM():
@@ -158,6 +159,30 @@ if __name__ == '__main__':
     @app.route('/admin-lieu', methods=['GET', 'POST'])
     def Lieuadmin():
         return render_template('admin_lieu.html', title='ville')
+
+    """////////////////////////etape////////////////////////////"""
+
+    @app.route('/admin-etape-delete', methods=['GET', 'POST'])
+    def EtapeAdminD():
+        return DeleteEtape()
+
+
+    @app.route('/admin-etape-select', methods=['GET', 'POST'])
+    def EtapeAdminS():
+        return SelectEtape()
+
+
+    @app.route('/admin-etape-create', methods=['GET', 'POST'])
+    def EtapeAdminc():
+        return CreateEtape()
+
+    @app.route('/admin-etape-modify', methods=['GET', 'POST'])
+    def EtapeAdminM():
+        return ModifyEtape()
+
+    @app.route('/admin-etape', methods=['GET', 'POST'])
+    def Etapeadmin():
+        return render_template('admin_etapes.html', title='ville')
 
 
 if __name__ == '__main__':

@@ -55,16 +55,12 @@ def CreateCircuit():
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
+                retourner = redirect("/admin-circuit")
             except:
                 print('pas bon')
     else:
         retourner = redirect('/')
     return retourner
-
-
-def is_user_logged():
-    cookie = session['user']['info']
-    return cookie[0] == 1 and cookie[3] is True
 
 
 def SelectCircuit():
@@ -124,6 +120,7 @@ def ModifCircuit():
                     db_instance = DBSingleton.Instance()
                     db_instance.query(sql)
                     print("good")
+                    retourner = redirect("/admin-circuit")
                 except:
                     print("faux")
     else:
@@ -173,6 +170,7 @@ def CreateVille():
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
+                retourner = redirect('/admin-ville')
             except:
                 print('pas bon')
     else:
@@ -225,6 +223,7 @@ def ModifyVille():
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
+                retourner = redirect('/admin-ville')
             except:
                 print('pas bon')
     else:
@@ -246,6 +245,7 @@ def DeleteVille():
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
             print('bon')
+            retourner = redirect('/admin-ville')
     else:
         retourner = redirect('/')
     return retourner
@@ -265,6 +265,7 @@ def CreatePays():
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
+                retourner = redirect('/admin-pays')
             except:
                 print('pas bon')
     else:
@@ -310,6 +311,7 @@ def ModifyPays():
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
+                retourner = redirect('/admin-pays')
             except:
                 print('pas bon')
     else:
@@ -331,6 +333,7 @@ def DeletePays():
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
             print('bon')
+            retourner = redirect('/admin-pays')
     else:
         retourner = redirect('/')
     return retourner
@@ -387,6 +390,7 @@ def ModifyUser():
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
+                retourner = redirect('/admin-user')
             except:
                 print('pas bon')
     else:
@@ -408,6 +412,7 @@ def DeleteUser():
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
             print('bon')
+            retourner = redirect('/admin-user')
     else:
         retourner = redirect('/')
     return retourner
@@ -434,6 +439,7 @@ def CreateLieu():
                 db_instance = DBSingleton.Instance()
                 db_instance.query(sql)
                 print('good')
+                retourner = redirect('/admin-lieu')
             except:
                 print('pas bon')
     else:
@@ -511,6 +517,131 @@ def DeleteLieu():
             db_instance = DBSingleton.Instance()
             db_instance.query(sql)
             print('bon')
+            retourner = redirect('/admin-lieu')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
+"""///////////////// Etape ////////////////////////"""
+
+def CreateEtape():
+    title = 'Pays'
+    if is_user_logged():
+        sql = "SELECT * FROM Circuit"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+
+        sql = "SELECT * FROM Ville"
+        db_instance = DBSingleton.Instance()
+        villes = db_instance.query(sql)
+
+        retourner = render_template('admin_etapes.html', title=title, tailles=" ", posts=posts, Villes=villes, nom='creer')
+        if request.method == 'POST':
+            ordre = request.form['ordre']
+            date = request.form['dateEtape']
+            duree = request.form['dureeEnMinutes']
+            id_circuit = request.form['id-circuit']
+            villeid = request.form['id-lieux']
+            record = (ordre, date, duree, id_circuit, villeid)
+            try:
+                sql = """INSERT INTO Etape (ordre, dateEtape, dureeEnMinute, circuit_ID, LieuDeVisite_ID)
+                         VALUES ('%s', '%s', '%s', '%s', '%s')""" % record
+                db_instance = DBSingleton.Instance()
+                db_instance.query(sql)
+                print('good')
+            except:
+                print('pas bon')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
+def SelectEtape():
+    title = 'Circuit'
+    if is_user_logged():
+        sql = "SELECT * FROM Etape"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        retourner = render_template('admin_etapes.html', title=title, places=" ", posts=posts, nom='select')
+        if request.method == "POST":
+            role = request.form['id-circuit']
+            print(role)
+            session['etape'] = {'role': role}
+            retourner = redirect('/admin-etape-modify')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
+def ModifyEtape():
+    title = 'Circuit'
+    role = session['etape']['role']
+    if is_user_logged():
+        sql = f"SELECT * FROM Etape WHERE ordre = {role}"
+        db_instance = DBSingleton.Instance()
+        taille = db_instance.query(sql)
+
+        sql = "SELECT * FROM Circuit"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+
+        temp = {"ordre":taille[0][0],
+                "circuit": taille[0][2],
+                "lieu": taille[0][3]}
+        sql = "SELECT * FROM Ville"
+        db_instance = DBSingleton.Instance()
+        villes = db_instance.query(sql)
+
+        sql = "SELECT * FROM Etape"
+        db_instance = DBSingleton.Instance()
+        places = db_instance.query(sql)
+
+        retourner = render_template('admin_etapes.html', title=title, places=places[0], tailles=taille, posts=posts, Villes=villes, nom='creer')
+        if request.method == 'POST':
+            ordre = request.form['ordre']
+            date = request.form['dateEtape']
+            duree = request.form['dureeEnMinutes']
+            id_circuit = request.form['id-circuit']
+            villeid = request.form['id-lieux']
+
+            try:
+                sql = f"""UPDATE Etape 
+                          SET ordre = '{ordre}', 
+                          dateEtape = '{date}', 
+                          dureeEnMinute = '{duree}', 
+                          circuit_ID = '{id_circuit}', 
+                          LieuDeVisite_ID = '{villeid}' 
+                          WHERE Etape.ordre = {temp["ordre"]} 
+                          AND Etape.circuit_ID = {temp["circuit"]} 
+                          AND Etape.LieuDeVisite_ID = {temp["lieu"]};"""
+                print(sql)
+                db_instance = DBSingleton.Instance()
+                db_instance.query(sql)
+                print('good')
+                retourner = redirect('/admin-etape')
+            except:
+                print('pas bon')
+    else:
+        retourner = redirect('/')
+    return retourner
+
+
+def DeleteEtape():
+    title = 'Pays'
+    if is_user_logged():
+        sql = "SELECT * FROM Etape"
+        db_instance = DBSingleton.Instance()
+        posts = db_instance.query(sql)
+        retourner = render_template('admin_etapes.html', title=title, posts=posts, nom='delete')
+        if request.method == "POST":
+            id = request.form['id-circuit']
+            sql = f"DELETE FROM Etape WHERE Etape.ordre = {id}"
+            print(sql)
+            db_instance = DBSingleton.Instance()
+            db_instance.query(sql)
+            print('bon')
+            retourner = redirect('/admin-etape')
     else:
         retourner = redirect('/')
     return retourner
