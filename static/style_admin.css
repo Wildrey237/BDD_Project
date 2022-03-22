@@ -1,6 +1,10 @@
-body {
-    background-image : url(https://wallpapercave.com/wp/wp2508307.jpg);
+.arriere{
+    background-image: url(https://wallpapercave.com/wp/wp2508307.jpg);
+    opacity : 0.90;
     background-size: cover;
+    height: 90vh;
+    width: 100vw;
+    position: absolute;
 }
 
 .deconnexion {
@@ -101,4 +105,8 @@ h1 {
     top: 25vw;
     left: 49.2vw;
     transform: translate(-50%, -50%);
+}
+
+.container {
+    position: relative;
 }
